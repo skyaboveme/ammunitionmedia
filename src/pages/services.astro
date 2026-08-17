@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import PhilosophyCards from '../components/PhilosophyCards.astro';
+
+const digitalServices = [
+  {
+    icon: 'tv',
+    title: 'Connected Television',
+    items: [
+      'Streaming TV Ads',
+      'OTT Platform Targeting',
+      'Addressable TV Campaigns',
+      'Cross-Screen Attribution',
+      'Household-Level Precision',
+      'Premium Inventory Access',
+    ],
+  },
+  {
+    icon: 'audio',
+    title: 'Digital Audio',
+    items: [
+      'Podcast Advertising',
+      'Streaming Music Platforms',
+      'Dynamic Audio Insertion',
+      'Genre & Mood Targeting',
+      'Voice-Enabled Ads',
+      'Listen-Through Attribution',
+    ],
+  },
+  {
+    icon: 'display',
+    title: 'Programmatic Display, Native & Video',
+    items: [
+      'Real-Time Bidding (RTB)',
+      'Native Content Integration',
+      'Video Pre-Roll & Mid-Roll',
+      'Contextual Targeting',
+      'Viewability Optimization',
+      'Cross-Device Reach',
+    ],
+  },
+  {
+    icon: 'identity',
+    title: 'Identity Resolution',
+    items: [
+      'Cross-Device Matching',
+      'Deterministic & Probabilistic IDs',
+      'First-Party Data Activation',
+      'Cookie-Free Solutions',
+      'Privacy-Compliant Targeting',
+      'Unified Customer View',
+    ],
+  },
+  {
+    icon: 'dooh',
+    title: 'Digital Out of Home',
+    items: [
+      'Programmatic Billboard Ads',
+      'Location-Based Targeting',
+      'Dynamic Creative Optimization',
+      'Real-Time Audience Measurement',
+      'Foot Traffic Attribution',
+      'Transit & Venue Networks',
+    ],
+  },
+  {
+    icon: 'retail',
+    title: 'Retail Media Networks',
+    items: [
+      'Shopper Marketing',
+      'In-Store Digital Displays',
+      'First-Party Retail Data',
+      'Purchase-Based Targeting',
+      'Closed-Loop Attribution',
+      'Co-Op Advertising Programs',
+    ],
+  },
+];
+
+const prServices = [
+  {
+    icon: 'pr',
+    title: 'PESO Public Relations & Promotions',
+    items: [
+      'News Releases',
+      'Community Relations',
+      'Event Management',
+      'Editorial Writing',
+      'On-Air Interview Development',
+      'Charity & Philanthropy',
+    ],
+  },
+  {
+    icon: 'events',
+    title: 'Entertainment, Events & Experiential',
+    items: [
+      'Celebrity Endorsements',
+      'Sports Marketing',
+      'Entertainment Partnerships',
+      'Experiential Activations',
+      'Live Event Production',
+      'Brand Ambassador Programs',
+    ],
+  },
+  {
+    icon: 'influencer',
+    title: 'Influencer Marketing & Sponsorships',
+    items: [
+      'Influencer Identification & Vetting',
+      'Campaign Strategy & Execution',
+      'Sponsorship Negotiation',
+      'Content Co-Creation',
+      'Performance Tracking',
+      'ROI Measurement',
+    ],
+  },
+];
+
+const philosophyBlocks = [
+  {
+    icon: 'creativity',
+    title: 'Creativity',
+    body: 'Our philosophy has been guided by one simple idea, that great concepts, will not go unnoticed. Therefore, we strive to develop bright, thoughtful ads that resonate and relate with your ideal audiences.',
+  },
+  {
+    icon: 'strategy',
+    title: 'Strategy',
+    body: 'We are living in a digital era and very few advertisers have the resources to identify and track online customers throughout the purchase cycle. We evaluate the major touch-points of consumers on their path to purchase and determine which marketing channels are contributing to the best outcomes.',
+  },
+  {
+    icon: 'safety',
+    title: 'Safety',
+    body: 'We cannot stress the importance of contextual relevance that ensures your ads appear to the right people at the right time in an appropriate, relevant, and safe environment. This is critical for building credibility and trust with your audience.',
+  },
+];
+---
+
+<BaseLayout
+  title="Services — Ammunition Media"
+  description="Ammunition Media offers Connected TV, Digital Audio, Programmatic, DOOH, Retail Media, PESO PR, Entertainment & Events, Influencer Marketing, and Sponsorship services."
+>
+  <Header slot="header" currentPath="/services/" />
+
+  <Hero
+    title="Our"
+    titleAccent="Services"
+    subtitle="End-to-end advertising solutions across every channel"
+    minHeight="70vh"
+    backgroundImage="/images/hero-services.jpg"
+  />
+
+  <ServiceGrid
+    title="Digital "
+    titleAccent="Media"
+    services={digitalServices}
+    id="digital-media"
+  />
+
+  <ServiceGrid
+    title="PR, Events & "
+    titleAccent="Influencer"
+    services={prServices}
+    id="pr-events"
+  />
+
+  <PhilosophyCards blocks={philosophyBlocks} />
+
+  <!-- CTA Section -->
+  <section class="services-cta section reveal">
+    <div class="container" style="text-align:center; max-width:700px;">
+      <h2 style="margin-bottom: var(--space-md);">Let's Build Your <span class="gradient-text">Media Strategy</span></h2>
+      <p style="color: var(--color-text-secondary); margin-bottom: var(--space-xl);">Every brand deserves a custom approach. Let's talk about how we can connect your message with your ideal audience.</p>
+      <a href="mailto:johnmark@ammunition.media" class="cta-button">
+        <span>Schedule Consultation</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

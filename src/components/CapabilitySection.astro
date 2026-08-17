@@ -1,0 +1,177 @@
+---
+export interface Capability {
+  icon: string;
+  title: string;
+  body: string;
+}
+
+export interface Props {
+  capabilities: Capability[];
+}
+
+const { capabilities } = Astro.props;
+
+const capabilityIcons: Record<string, string> = {
+  'identity': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+  'data-activation': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+  'monitor': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>',
+  'audience': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+  'inventory': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  'collection': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></svg>',
+};
+---
+
+<div class="capabilities">
+  {capabilities.map((cap, index) => (
+    <section class={`capability section reveal ${index % 2 !== 0 ? 'capability--reversed' : ''}`}>
+      <div class="capability__inner container">
+        <div class="capability__icon-wrap">
+          <div class="capability__icon-box">
+            <div class="capability__icon" set:html={capabilityIcons[cap.icon] || capabilityIcons['identity']} />
+          </div>
+          <div class="capability__icon-glow"></div>
+        </div>
+
+        <div class="capability__content">
+          <span class="capability__number">{String(index + 1).padStart(2, '0')}</span>
+          <h2 class="capability__title">{cap.title}</h2>
+          <p class="capability__body">{cap.body}</p>
+        </div>
+      </div>
+    </section>
+  ))}
+</div>
+
+<style>
+  .capability {
+    padding: var(--space-2xl) 0;
+  }
+
+  .capability:nth-child(even) {
+    background: var(--color-surface);
+  }
+
+  .capability__inner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-2xl);
+    align-items: center;
+    max-width: 1100px;
+  }
+
+  .capability--reversed .capability__inner {
+    grid-template-columns: 1.5fr 1fr;
+  }
+
+  .capability--reversed .capability__icon-wrap {
+    order: 2;
+  }
+
+  .capability--reversed .capability__content {
+    order: 1;
+  }
+
+  /* Icon */
+  .capability__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .capability__icon-box {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    position: relative;
+    z-index: 1;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .capability:hover .capability__icon-box {
+    border-color: var(--color-border-glow);
+    box-shadow: var(--glow-sm);
+  }
+
+  .capability__icon {
+    width: 48px;
+    height: 48px;
+    color: var(--color-accent-solid);
+  }
+
+  .capability__icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .capability__icon-glow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.1), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Content */
+  .capability__number {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent-solid);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    display: block;
+    opacity: 0.7;
+  }
+
+  .capability__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+  }
+
+  .capability__body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    max-width: 550px;
+  }
+
+  @media (max-width: 768px) {
+    .capability__inner,
+    .capability--reversed .capability__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      text-align: center;
+    }
+
+    .capability--reversed .capability__icon-wrap,
+    .capability--reversed .capability__content {
+      order: unset;
+    }
+
+    .capability__body {
+      max-width: none;
+    }
+
+    .capability__icon-box {
+      width: 100px;
+      height: 100px;
+      border-radius: 24px;
+    }
+
+    .capability__icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>

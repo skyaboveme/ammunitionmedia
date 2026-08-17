@@ -1,0 +1,135 @@
+---
+export interface Props {
+  title: string;
+  date: Date;
+  slug: string;
+  category?: string;
+  index?: number;
+}
+
+const { title, date, slug, category, index = 0 } = Astro.props;
+
+function formatDate(d: Date): string {
+  return d.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+---
+
+<article class={`glass-card insight-card reveal reveal-delay-${(index % 3) + 1}`}>
+  <div class="insight-card__inner">
+    <div class="insight-card__meta">
+      {category && <span class="insight-card__category">{category}</span>}
+      <time class="insight-card__date" datetime={date.toISOString()}>
+        {formatDate(date)}
+      </time>
+    </div>
+
+    <h3 class="insight-card__title">
+      <a href={`/insights/${slug}/`}>{title}</a>
+    </h3>
+
+    <a href={`/insights/${slug}/`} class="insight-card__link">
+      Read Article
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+
+  <div class="insight-card__glow"></div>
+</article>
+
+<style>
+  .insight-card {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .insight-card__inner {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .insight-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .insight-card__category {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--color-accent-solid);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  .insight-card__date {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .insight-card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+    flex: 1;
+  }
+
+  .insight-card__title a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .insight-card__title a:hover {
+    color: var(--color-accent-solid);
+  }
+
+  .insight-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-accent-solid);
+    text-decoration: none;
+    transition: gap var(--transition-fast), color var(--transition-fast);
+    margin-top: auto;
+  }
+
+  .insight-card__link:hover {
+    gap: 0.6rem;
+    color: var(--color-cyan);
+  }
+
+  .insight-card__glow {
+    position: absolute;
+    bottom: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 40%;
+    background: radial-gradient(ellipse, rgba(236, 72, 153, 0.06), transparent);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .insight-card:hover .insight-card__glow {
+    opacity: 1;
+  }
+</style>

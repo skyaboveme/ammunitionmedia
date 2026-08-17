@@ -1,0 +1,291 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import StatsBar from '../components/StatsBar.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import PhilosophyCards from '../components/PhilosophyCards.astro';
+import InsightCard from '../components/InsightCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('insights');
+const latestPosts = allPosts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const stats = [
+  { value: '6', label: 'Core Channels' },
+  { value: '87%', label: 'US CTV Reach' },
+  { value: '11+', label: 'Industry Insights' },
+  { value: '2', label: 'Markets' },
+];
+
+const digitalServices = [
+  {
+    icon: 'tv',
+    title: 'Connected Television',
+    items: [
+      'Streaming TV Ads',
+      'OTT Platform Targeting',
+      'Addressable TV Campaigns',
+      'Cross-Screen Attribution',
+      'Household-Level Precision',
+      'Premium Inventory Access',
+    ],
+  },
+  {
+    icon: 'audio',
+    title: 'Digital Audio',
+    items: [
+      'Podcast Advertising',
+      'Streaming Music Platforms',
+      'Dynamic Audio Insertion',
+      'Genre & Mood Targeting',
+      'Voice-Enabled Ads',
+      'Listen-Through Attribution',
+    ],
+  },
+  {
+    icon: 'display',
+    title: 'Programmatic Display, Native & Video',
+    items: [
+      'Real-Time Bidding (RTB)',
+      'Native Content Integration',
+      'Video Pre-Roll & Mid-Roll',
+      'Contextual Targeting',
+      'Viewability Optimization',
+      'Cross-Device Reach',
+    ],
+  },
+  {
+    icon: 'identity',
+    title: 'Identity Resolution',
+    items: [
+      'Cross-Device Matching',
+      'Deterministic & Probabilistic IDs',
+      'First-Party Data Activation',
+      'Cookie-Free Solutions',
+      'Privacy-Compliant Targeting',
+      'Unified Customer View',
+    ],
+  },
+  {
+    icon: 'dooh',
+    title: 'Digital Out of Home',
+    items: [
+      'Programmatic Billboard Ads',
+      'Location-Based Targeting',
+      'Dynamic Creative Optimization',
+      'Real-Time Audience Measurement',
+      'Foot Traffic Attribution',
+      'Transit & Venue Networks',
+    ],
+  },
+  {
+    icon: 'retail',
+    title: 'Retail Media Networks',
+    items: [
+      'Shopper Marketing',
+      'In-Store Digital Displays',
+      'First-Party Retail Data',
+      'Purchase-Based Targeting',
+      'Closed-Loop Attribution',
+      'Co-Op Advertising Programs',
+    ],
+  },
+];
+
+const philosophyBlocks = [
+  {
+    icon: 'creativity',
+    title: 'Creativity',
+    body: 'Our philosophy has been guided by one simple idea, that great concepts, will not go unnoticed. Therefore, we strive to develop bright, thoughtful ads that resonate and relate with your ideal audiences.',
+  },
+  {
+    icon: 'strategy',
+    title: 'Strategy',
+    body: 'We are living in a digital era and very few advertisers have the resources to identify and track online customers throughout the purchase cycle. We evaluate the major touch-points of consumers on their path to purchase and determine which marketing channels are contributing to the best outcomes.',
+  },
+  {
+    icon: 'safety',
+    title: 'Safety',
+    body: 'We cannot stress the importance of contextual relevance that ensures your ads appear to the right people at the right time in an appropriate, relevant, and safe environment. This is critical for building credibility and trust with your audience.',
+  },
+];
+---
+
+<BaseLayout
+  title="Ammunition Media | Enhance Your Reach Today"
+  description="Turn web traffic into revenue. Ammunition Media provides modern AdTech solutions for ambitious brands. Connected TV, Digital Audio, Programmatic, Identity Resolution, DOOH, and Retail Media."
+>
+  <Header slot="header" currentPath="/" />
+
+  <Hero
+    title="Turn Web Traffic"
+    titleAccent="Into Revenue"
+    subtitle="Modern AdTech for Ambitious Brands"
+    description="Strategic advertising solutions that connect your brand with the right audience, at the right time, on the right platform."
+    ctaText="Schedule Consultation"
+    ctaHref="mailto:johnmark@ammunition.media"
+    backgroundImage="/images/hero-home.jpg"
+  />
+
+  <StatsBar stats={stats} />
+
+  <ServiceGrid
+    title="What We "
+    titleAccent="Deliver"
+    services={digitalServices}
+  />
+
+  <PhilosophyCards blocks={philosophyBlocks} />
+
+  <!-- Latest Insights -->
+  <section class="latest-insights section">
+    <div class="container">
+      <div class="latest-insights__header reveal">
+        <h2>Latest <span class="gradient-text">Insights</span></h2>
+        <a href="/insights/" class="latest-insights__all">
+          View All
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+      <div class="latest-insights__grid">
+        {latestPosts.map((post, i) => (
+          <InsightCard
+            title={post.data.title}
+            date={post.data.date}
+            slug={post.id}
+            category={post.data.category}
+            index={i}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="final-cta section reveal">
+    <div class="final-cta__mesh">
+      <div class="mesh-orb mesh-orb--indigo final-cta__orb-1"></div>
+      <div class="mesh-orb mesh-orb--pink final-cta__orb-2"></div>
+    </div>
+    <div class="container final-cta__inner">
+      <h2 class="final-cta__title">Ready to Enhance <span class="gradient-text">Your Reach?</span></h2>
+      <p class="final-cta__body">Let's build a data-driven advertising strategy that connects your brand with the right audience.</p>
+      <a href="mailto:johnmark@ammunition.media" class="cta-button final-cta__button">
+        <span>Schedule Consultation</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  /* Latest Insights */
+  .latest-insights__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+  }
+
+  .latest-insights__header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .latest-insights__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-accent-solid);
+    text-decoration: none;
+    transition: gap var(--transition-fast);
+  }
+
+  .latest-insights__all:hover {
+    gap: 0.6rem;
+  }
+
+  .latest-insights__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  /* Final CTA */
+  .final-cta {
+    position: relative;
+    text-align: center;
+    padding: var(--space-3xl) 0;
+    overflow: hidden;
+  }
+
+  .final-cta__mesh {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .final-cta__orb-1 {
+    width: 400px;
+    height: 400px;
+    top: -20%;
+    left: -10%;
+    opacity: 0.2;
+  }
+
+  .final-cta__orb-2 {
+    width: 350px;
+    height: 350px;
+    bottom: -20%;
+    right: -10%;
+    opacity: 0.15;
+  }
+
+  .final-cta__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .final-cta__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .final-cta__body {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .final-cta__button {
+    padding: 1.1rem 3rem;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .latest-insights__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .latest-insights__header {
+      flex-direction: column;
+      gap: var(--space-sm);
+      align-items: flex-start;
+    }
+  }
+</style>

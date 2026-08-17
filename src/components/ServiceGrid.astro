@@ -1,0 +1,161 @@
+---
+export interface ServiceCard {
+  icon: string;
+  title: string;
+  items: string[];
+}
+
+export interface Props {
+  title?: string;
+  titleAccent?: string;
+  services: ServiceCard[];
+  id?: string;
+}
+
+const { title, titleAccent, services, id = 'service-grid' } = Astro.props;
+
+const iconMap: Record<string, string> = {
+  'tv': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+  'audio': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+  'display': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 7h20M7 3v4"/></svg>',
+  'identity': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+  'dooh': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>',
+  'retail': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>',
+  'pr': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6z"/></svg>',
+  'events': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+  'influencer': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  'data': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
+  'monitor': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>',
+  'audience': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+  'inventory': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  'collection': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></svg>',
+};
+---
+
+<section class="service-grid section" id={id}>
+  <div class="container">
+    {(title || titleAccent) && (
+      <div class="service-grid__header reveal">
+        <h2 class="service-grid__title">
+          {title}
+          {titleAccent && <span class="gradient-text">{titleAccent}</span>}
+        </h2>
+      </div>
+    )}
+
+    <div class="service-grid__cards">
+      {services.map((service, index) => (
+        <div class={`glass-card service-card reveal reveal-delay-${(index % 3) + 1}`}>
+          <div class="service-card__icon" set:html={iconMap[service.icon] || iconMap['tv']} />
+          <h3 class="service-card__title">{service.title}</h3>
+          <ul class="service-card__items">
+            {service.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <div class="service-card__glow"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-grid__header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .service-grid__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .service-grid__title .gradient-text {
+    display: inline;
+  }
+
+  .service-grid__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .service-card {
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card__icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-md);
+    color: var(--color-accent-solid);
+  }
+
+  .service-card__icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .service-card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+  }
+
+  .service-card__items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .service-card__items li {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .service-card__items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-accent-solid);
+    opacity: 0.6;
+  }
+
+  .service-card__glow {
+    position: absolute;
+    bottom: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 50%;
+    background: radial-gradient(ellipse, rgba(99, 102, 241, 0.08), transparent);
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+    opacity: 0;
+  }
+
+  .service-card:hover .service-card__glow {
+    opacity: 1;
+  }
+
+  @media (max-width: 968px) {
+    .service-grid__cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .service-grid__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

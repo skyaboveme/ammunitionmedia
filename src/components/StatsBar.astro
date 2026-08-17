@@ -1,0 +1,86 @@
+---
+export interface Stat {
+  value: string;
+  label: string;
+}
+
+export interface Props {
+  stats: Stat[];
+}
+
+const { stats } = Astro.props;
+---
+
+<section class="stats-bar reveal">
+  <div class="stats-bar__inner container">
+    {stats.map((stat, index) => (
+      <div class={`stats-bar__item reveal reveal-delay-${index + 1}`}>
+        <span class="stats-bar__value" data-target={stat.value}>{stat.value}</span>
+        <span class="stats-bar__label">{stat.label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .stats-bar {
+    position: relative;
+    padding: var(--space-xl) 0;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .stats-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(236, 72, 153, 0.03));
+    pointer-events: none;
+  }
+
+  .stats-bar__inner {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2xl);
+    flex-wrap: wrap;
+  }
+
+  .stats-bar__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 140px;
+  }
+
+  .stats-bar__value {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+
+  .stats-bar__label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 600px) {
+    .stats-bar__inner {
+      gap: var(--space-lg);
+    }
+
+    .stats-bar__item {
+      min-width: 100px;
+    }
+  }
+</style>

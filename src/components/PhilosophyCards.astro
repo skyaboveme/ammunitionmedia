@@ -1,0 +1,100 @@
+---
+export interface PhilosophyBlock {
+  icon: string;
+  title: string;
+  body: string;
+}
+
+export interface Props {
+  blocks: PhilosophyBlock[];
+}
+
+const { blocks } = Astro.props;
+
+const iconSvgs: Record<string, string> = {
+  creativity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>',
+  strategy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+  safety: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>',
+};
+---
+
+<section class="philosophy section">
+  <div class="container">
+    <div class="philosophy__cards">
+      {blocks.map((block, index) => (
+        <div class={`glass-card philosophy__card reveal reveal-delay-${index + 1}`}>
+          <div class="philosophy__icon" set:html={iconSvgs[block.icon] || iconSvgs['creativity']} />
+          <h3 class="philosophy__title">{block.title}</h3>
+          <p class="philosophy__body">{block.body}</p>
+          <div class="philosophy__accent"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .philosophy__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .philosophy__card {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .philosophy__icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: var(--space-md);
+    color: var(--color-cyan);
+    padding: 12px;
+    background: rgba(6, 182, 212, 0.08);
+    border-radius: 16px;
+    border: 1px solid rgba(6, 182, 212, 0.15);
+  }
+
+  .philosophy__icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .philosophy__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+  }
+
+  .philosophy__body {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 380px;
+  }
+
+  .philosophy__accent {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent-start), var(--color-accent-end));
+    border-radius: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .philosophy__cards {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+  }
+</style>

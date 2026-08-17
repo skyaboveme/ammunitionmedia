@@ -1,0 +1,211 @@
+---
+export interface Props {
+  title: string;
+  titleAccent?: string;
+  subtitle?: string;
+  description?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  minHeight?: string;
+  backgroundImage?: string;
+}
+
+const {
+  title,
+  titleAccent,
+  subtitle,
+  description,
+  ctaText,
+  ctaHref,
+  minHeight = '95vh',
+  backgroundImage,
+} = Astro.props;
+---
+
+<section class="hero" style={`min-height: ${minHeight};`}>
+  <!-- Gradient Mesh Orbs -->
+  <div class="hero__mesh">
+    <div class="mesh-orb mesh-orb--indigo hero__orb-1"></div>
+    <div class="mesh-orb mesh-orb--pink hero__orb-2"></div>
+    <div class="mesh-orb mesh-orb--cyan hero__orb-3"></div>
+  </div>
+
+  <!-- Grid Lines -->
+  <div class="hero__grid"></div>
+
+  {backgroundImage && (
+    <div class="hero__bg-image">
+      <img src={backgroundImage} alt="" loading="eager" />
+    </div>
+  )}
+
+  <div class="hero__content">
+    <h1 class="hero__title">
+      {title}
+      {titleAccent && <span class="gradient-text">{titleAccent}</span>}
+    </h1>
+    {subtitle && <p class="hero__subtitle">{subtitle}</p>}
+    {description && <p class="hero__description">{description}</p>}
+    {ctaText && ctaHref && (
+      <a href={ctaHref} class="cta-button hero__cta">
+        <span>{ctaText}</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    )}
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero__scroll">
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+
+  /* Mesh Background */
+  .hero__mesh {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .hero__orb-1 {
+    width: 600px;
+    height: 600px;
+    top: -15%;
+    right: -10%;
+    opacity: 0.3;
+  }
+
+  .hero__orb-2 {
+    width: 500px;
+    height: 500px;
+    bottom: -10%;
+    left: -10%;
+    opacity: 0.2;
+  }
+
+  .hero__orb-3 {
+    width: 400px;
+    height: 400px;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.15;
+  }
+
+  /* Grid pattern overlay */
+  .hero__grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 80%);
+  }
+
+  /* Background Image */
+  .hero__bg-image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+  }
+
+  /* Content */
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: var(--space-xl) clamp(1.25rem, 4vw, 3rem);
+  }
+
+  .hero__title {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+  }
+
+  .hero__title .gradient-text {
+    display: block;
+  }
+
+  .hero__subtitle {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.01em;
+  }
+
+  .hero__description {
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto var(--space-lg);
+    line-height: 1.7;
+  }
+
+  .hero__cta {
+    margin-top: var(--space-sm);
+    padding: 1.1rem 2.75rem;
+    font-size: 1rem;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* Scroll indicator */
+  .hero__scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .hero__scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--color-accent-start), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 80vh !important;
+    }
+
+    .hero__orb-1 { width: 300px; height: 300px; }
+    .hero__orb-2 { width: 250px; height: 250px; }
+    .hero__orb-3 { width: 200px; height: 200px; }
+  }
+</style>

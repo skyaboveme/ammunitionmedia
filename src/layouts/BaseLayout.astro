@@ -1,0 +1,121 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  type?: 'website' | 'article';
+  author?: string;
+  datePublished?: string;
+}
+
+const {
+  title,
+  description = 'Ammunition Media offers data-driven digital marketing and targeted advertising solutions. Modern AdTech for ambitious brands — CTV, Digital Audio, Programmatic, Identity Resolution, DOOH, and Retail Media.',
+  ogImage = '/images/logo.png',
+  canonicalUrl,
+  type = 'website',
+  author,
+  datePublished,
+} = Astro.props;
+
+const siteUrl = 'https://www.ammunition.media';
+const fullTitle = title.includes('Ammunition Media') ? title : `${title} — Ammunition Media`;
+const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Ammunition Media',
+  url: siteUrl,
+  description: 'Modern AdTech for Ambitious Brands. Data-driven digital advertising solutions — CTV, Digital Audio, Programmatic, Identity Resolution, DOOH, and Retail Media.',
+  founder: {
+    '@type': 'Person',
+    name: 'John Mark Rankins',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'johnmark@ammunition.media',
+    contactType: 'sales',
+  },
+  sameAs: [
+    'https://www.linkedin.com/in/johnmarkrankins/',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Ammunition Media" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={type} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {author && <meta name="author" content={author} />}
+    {datePublished && <meta itemprop="datePublished" content={datePublished} />}
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Global Styles -->
+    <style is:global>
+      @import '../styles/global.css';
+    </style>
+  </head>
+  <body>
+    <slot name="header" />
+    <main>
+      <slot />
+    </main>
+    <slot name="footer" />
+
+    <!-- Scroll Reveal Observer -->
+    <script>
+      function initReveal() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      }
+
+      // Run on initial load and on Astro page transitions
+      document.addEventListener('DOMContentLoaded', initReveal);
+      document.addEventListener('astro:page-load', initReveal);
+    </script>
+  </body>
+</html>

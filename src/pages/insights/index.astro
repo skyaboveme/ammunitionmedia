@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import InsightCard from '../../components/InsightCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('insights');
+const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title="Insights — Ammunition Media"
+  description="Industry insights, advertising trends, and expert analysis from Ammunition Media. Stay informed on CTV, programmatic, digital audio, identity resolution, and more."
+>
+  <Header slot="header" currentPath="/insights/" />
+
+  <section class="insights-page">
+    <div class="container">
+      <div class="insights-page__header reveal">
+        <h1>Industry <span class="gradient-text">Insights</span></h1>
+        <p class="insights-page__subtitle">Expert analysis on advertising trends, technology, and strategy.</p>
+      </div>
+
+      <div class="insights-grid">
+        {sortedPosts.map((post, i) => (
+          <InsightCard
+            title={post.data.title}
+            date={post.data.date}
+            slug={post.id}
+            category={post.data.category}
+            index={i}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .insights-page {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    min-height: 60vh;
+  }
+
+  .insights-page__header {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .insights-page__header h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: var(--space-sm);
+  }
+
+  .insights-page__subtitle {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    max-width: 500px;
+  }
+
+  .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 968px) {
+    .insights-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .insights-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

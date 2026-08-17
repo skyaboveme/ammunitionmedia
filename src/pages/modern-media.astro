@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import CapabilitySection from '../components/CapabilitySection.astro';
+
+const capabilities = [
+  {
+    icon: 'identity',
+    title: 'Identity Resolution',
+    body: 'Identity resolution connects disparate data points across devices, platforms, and channels to create a unified view of each customer. This enables precise targeting and personalized messaging at scale, ensuring your campaigns reach the right individual regardless of where they engage.',
+  },
+  {
+    icon: 'data-activation',
+    title: 'Data Activation',
+    body: 'Transform raw data into actionable insights. Our data activation strategies take your first-party data and combine it with premium third-party sources to create powerful audience segments that drive campaign performance and maximize your advertising ROI.',
+  },
+  {
+    icon: 'monitor',
+    title: 'Monitor & Measurement',
+    body: 'Real-time campaign monitoring and advanced measurement frameworks give you complete visibility into performance. From viewability and engagement metrics to multi-touch attribution models, we provide the intelligence needed to optimize campaigns continuously.',
+  },
+  {
+    icon: 'audience',
+    title: 'Addressable Audiences',
+    body: 'Reach specific households and individuals with tailored messages across connected TV, digital audio, display, and video. Addressable advertising eliminates waste by serving ads only to your most valuable prospects based on deterministic data.',
+  },
+  {
+    icon: 'inventory',
+    title: 'People-Based Inventory',
+    body: 'Access premium, people-based inventory across all major platforms and publishers. Our relationships and technology partnerships ensure your ads appear in brand-safe environments while reaching authenticated, verified audiences at scale.',
+  },
+  {
+    icon: 'collection',
+    title: 'Data Collection',
+    body: 'Build a robust first-party data foundation through ethical, privacy-compliant data collection strategies. From pixel implementation to CRM integration, we help you capture and organize the data that powers every aspect of your digital advertising.',
+  },
+];
+---
+
+<BaseLayout
+  title="Modern Digital Media — Ammunition Media"
+  description="Discover Ammunition Media's modern digital media capabilities: Identity Resolution, Data Activation, Monitoring & Measurement, Addressable Audiences, People-Based Inventory, and Data Collection."
+>
+  <Header slot="header" currentPath="/modern-media/" />
+
+  <Hero
+    title="Modern Digital"
+    titleAccent="Media"
+    subtitle="Data-Driven Advertising Technology"
+    description="The infrastructure and intelligence behind every successful campaign."
+    minHeight="70vh"
+    backgroundImage="/images/hero-modern-media.jpg"
+  />
+
+  <CapabilitySection capabilities={capabilities} />
+
+  <!-- CTA Section -->
+  <section class="media-cta section reveal">
+    <div class="media-cta__mesh">
+      <div class="mesh-orb mesh-orb--cyan media-cta__orb"></div>
+    </div>
+    <div class="container media-cta__inner">
+      <h2>Unlock the Power of <span class="gradient-text-cyan">Modern AdTech</span></h2>
+      <p class="media-cta__body">See how data-driven advertising can transform your brand's reach and performance.</p>
+      <a href="mailto:johnmark@ammunition.media" class="cta-button">
+        <span>Schedule Consultation</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .media-cta {
+    position: relative;
+    text-align: center;
+    padding: var(--space-3xl) 0;
+    overflow: hidden;
+  }
+
+  .media-cta__mesh {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .media-cta__orb {
+    width: 500px;
+    height: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.12;
+  }
+
+  .media-cta__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .media-cta__inner h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .media-cta__body {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+  }
+</style>

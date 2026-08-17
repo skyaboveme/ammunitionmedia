@@ -1,0 +1,42 @@
+# Ammunition Media
+> Modern AdTech for Ambitious Brands
+
+## About
+Ammunition Media is a data-driven digital advertising and media agency led by John Mark Rankins. We specialize in modern AdTech solutions that turn web traffic into revenue for ambitious brands. Our approach combines strategic creativity with cutting-edge advertising technology to deliver measurable business outcomes.
+
+## Locations
+- Toledo, Ohio
+- Beaufort, South Carolina
+
+## Contact
+- Email: johnmark@ammunition.media
+- LinkedIn: https://www.linkedin.com/in/johnmarkrankins/
+- Website: https://www.ammunition.media
+
+## Services
+
+### Digital Media
+- Connected Television (CTV) — Streaming TV ads with household-level precision and cross-screen attribution
+- Digital Audio — Podcast and streaming music advertising with dynamic insertion and listen-through attribution
+- Programmatic Display, Native & Video — Real-time bidding, contextual targeting, and cross-device reach
+- Identity Resolution — Cross-device matching, cookie-free solutions, and unified customer view
+- Digital Out of Home (DOOH) — Programmatic billboard ads, location-based targeting, and foot traffic attribution
+- Retail Media Networks — Shopper marketing, first-party retail data, and closed-loop attribution
+
+### PR & Promotions
+- PESO Public Relations — News releases, community relations, editorial writing
+- Entertainment & Events — Celebrity endorsements, experiential activations, live event production
+- Influencer Marketing & Sponsorships — Campaign strategy, content co-creation, ROI measurement
+
+### Modern Media Capabilities
+- Identity Resolution — Unified customer view across devices and channels
+- Data Activation — First-party and third-party data audience segmentation
+- Monitor & Measurement — Real-time performance tracking and multi-touch attribution
+- Addressable Audiences — Household and individual-level deterministic targeting
+- People-Based Inventory — Premium, authenticated audience reach at scale
+- Data Collection — Privacy-compliant first-party data foundation building
+
+## Philosophy
+- **Creativity**: Bright, thoughtful ads that resonate with ideal audiences
+- **Strategy**: Data-driven evaluation of consumer touchpoints and marketing channels
+- **Safety**: Contextual relevance ensuring brand-safe, appropriate ad environments

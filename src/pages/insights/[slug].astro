@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import InsightCard from '../../components/InsightCard.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('insights');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// Get related posts (same category or latest)
+const allPosts = await getCollection('insights');
+const relatedPosts = allPosts
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => {
+    // Prioritize same category
+    const aMatch = a.data.category === post.data.category ? 1 : 0;
+    const bMatch = b.data.category === post.data.category ? 1 : 0;
+    if (bMatch !== aMatch) return bMatch - aMatch;
+    return b.data.date.getTime() - a.data.date.getTime();
+  })
+  .slice(0, 2);
+
+function formatDateLong(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<BaseLayout
+  title={`${post.data.title} — Ammunition Media`}
+  description={post.data.description || `Read "${post.data.title}" from Ammunition Media Insights.`}
+  type="article"
+  author={post.data.author}
+  datePublished={post.data.date.toISOString()}
+>
+  <Header slot="header" currentPath="/insights/" />
+
+  <article class="post">
+    <div class="post__header reveal">
+      <a href="/insights/" class="post__back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        Back to Insights
+      </a>
+
+      <div class="post__meta-top">
+        {post.data.category && <span class="post__category">{post.data.category}</span>}
+        <time datetime={post.data.date.toISOString()}>{formatDateLong(post.data.date)}</time>
+        <span>·</span>
+        <span>{post.data.author}</span>
+      </div>
+
+      <h1 class="post__title">{post.data.title}</h1>
+    </div>
+
+    <div class="post__content reveal">
+      <Content />
+    </div>
+
+    {relatedPosts.length > 0 && (
+      <div class="post__related reveal">
+        <h3>Continue Reading</h3>
+        <div class="post__related-grid">
+          {relatedPosts.map((rp, i) => (
+            <InsightCard
+              title={rp.data.title}
+              date={rp.data.date}
+              slug={rp.id}
+              category={rp.data.category}
+              index={i}
+            />
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-xl) clamp(1.25rem, 4vw, 3rem) var(--space-3xl);
+  }
+
+  .post__header {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .post__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: var(--space-lg);
+    color: var(--color-accent-solid);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: gap var(--transition-fast);
+  }
+
+  .post__back:hover {
+    gap: 0.6rem;
+  }
+
+  .post__meta-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .post__category {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--color-accent-solid);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  .post__title {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+    color: var(--color-text);
+  }
+
+  /* Content */
+  .post__content {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text-secondary);
+  }
+
+  .post__content :global(h2) {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: var(--space-xl) 0 var(--space-md);
+    color: var(--color-text);
+    background: linear-gradient(135deg, var(--color-text), var(--color-accent-solid));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .post__content :global(h3) {
+    font-size: 1.3rem;
+    margin: var(--space-lg) 0 var(--space-sm);
+    color: var(--color-text);
+  }
+
+  .post__content :global(p) {
+    margin-bottom: 1.5em;
+    color: var(--color-text-secondary);
+  }
+
+  .post__content :global(strong) {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .post__content :global(ul),
+  .post__content :global(ol) {
+    margin: 1em 0;
+    padding-left: 1.5em;
+  }
+
+  .post__content :global(ul) {
+    list-style: disc;
+  }
+
+  .post__content :global(ol) {
+    list-style: decimal;
+  }
+
+  .post__content :global(li) {
+    margin-bottom: 0.5em;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  .post__content :global(li::marker) {
+    color: var(--color-accent-solid);
+  }
+
+  .post__content :global(blockquote) {
+    border-left: 3px solid;
+    border-image: linear-gradient(to bottom, var(--color-accent-start), var(--color-accent-end)) 1;
+    padding-left: var(--space-md);
+    margin: var(--space-lg) 0;
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  .post__content :global(a) {
+    color: var(--color-accent-solid);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast);
+  }
+
+  .post__content :global(a:hover) {
+    color: var(--color-cyan);
+  }
+
+  /* Related Posts */
+  .post__related {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .post__related h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-lg);
+    color: var(--color-text);
+  }
+
+  .post__related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 600px) {
+    .post__related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
