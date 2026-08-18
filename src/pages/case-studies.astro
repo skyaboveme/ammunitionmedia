@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+
+const caseStudies = [
+  {
+    industry: 'E-Commerce',
+    title: 'DTC Lifestyle Brand Scales Revenue with CTV & Programmatic',
+    challenge: 'A fast-growing direct-to-consumer brand needed to break through digital ad fatigue and reach new audiences beyond social media.',
+    solution: 'We deployed a full-funnel strategy combining Connected TV for top-of-funnel brand awareness with programmatic display retargeting to drive conversions.',
+    channels: ['Connected TV', 'Programmatic Display', 'Identity Resolution'],
+    metrics: [
+      { value: '327%', label: 'Return on Ad Spend' },
+      { value: '42%', label: 'Lower Cost Per Acquisition' },
+      { value: '2.1M', label: 'Households Reached' },
+      { value: '68%', label: 'New Customer Rate' },
+    ],
+  },
+  {
+    industry: 'Healthcare',
+    title: 'Regional Health Network Drives Appointment Volume',
+    challenge: 'A multi-location healthcare network struggled to reach patients in competitive suburban markets where larger systems dominated awareness.',
+    solution: 'We combined Digital Audio (podcast and streaming) with Digital Out of Home in high-traffic corridors near clinic locations, layering identity resolution for cross-device attribution.',
+    channels: ['Digital Audio', 'Digital Out of Home', 'Identity Resolution'],
+    metrics: [
+      { value: '156%', label: 'Increase in Bookings' },
+      { value: '3.8x', label: 'Foot Traffic Lift' },
+      { value: '89%', label: 'Listen-Through Rate' },
+      { value: '$12', label: 'Cost Per Appointment' },
+    ],
+  },
+  {
+    industry: 'Retail',
+    title: 'National Retailer Unifies Customer View Across Channels',
+    challenge: 'A national retail chain had fragmented audience data across in-store, web, and app channels — making attribution and retargeting nearly impossible.',
+    solution: 'We implemented a full Identity Resolution stack with cross-device matching and first-party data activation, paired with Retail Media Network campaigns for closed-loop attribution.',
+    channels: ['Identity Resolution', 'Retail Media Networks', 'Programmatic Display'],
+    metrics: [
+      { value: '89%', label: 'Identity Match Rate' },
+      { value: '2.4x', label: 'Conversion Lift' },
+      { value: '34%', label: 'Reduction in Wasted Spend' },
+      { value: '4.2M', label: 'Unified Customer Profiles' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Case Studies — Results That Speak | Ammunition Media"
+  description="See how Ammunition Media drives measurable results with modern AdTech. Case studies in CTV, digital audio, programmatic, identity resolution, and more."
+>
+  <Header slot="header" currentPath="/case-studies/" />
+
+  <Hero
+    title="Our"
+    titleAccent="Results"
+    subtitle="Campaign Performance That Speaks for Itself"
+    description="Real strategies, real outcomes. See how we turn modern advertising technology into measurable business growth."
+    backgroundImage="/images/hero-case-studies.jpg"
+  />
+
+  <!-- Case Studies -->
+  <section class="case-studies section">
+    <div class="container">
+      {caseStudies.map((study, index) => (
+        <article class={`case-study reveal ${index > 0 ? 'reveal-delay-1' : ''}`}>
+          <div class="case-study__header">
+            <span class="case-study__industry">{study.industry}</span>
+            <h2 class="case-study__title">{study.title}</h2>
+          </div>
+
+          <div class="case-study__body">
+            <div class="case-study__narrative">
+              <div class="case-study__block">
+                <h4>The Challenge</h4>
+                <p>{study.challenge}</p>
+              </div>
+              <div class="case-study__block">
+                <h4>The Solution</h4>
+                <p>{study.solution}</p>
+              </div>
+              <div class="case-study__channels">
+                {study.channels.map((ch) => (
+                  <span class="case-study__channel">{ch}</span>
+                ))}
+              </div>
+            </div>
+
+            <div class="case-study__metrics">
+              {study.metrics.map((m) => (
+                <div class="case-study__metric">
+                  <span class="case-study__metric-value">{m.value}</span>
+                  <span class="case-study__metric-label">{m.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="final-cta section reveal">
+    <div class="final-cta__mesh">
+      <div class="mesh-orb mesh-orb--indigo final-cta__orb-1"></div>
+      <div class="mesh-orb mesh-orb--pink final-cta__orb-2"></div>
+    </div>
+    <div class="container final-cta__inner">
+      <h2 class="final-cta__title">Ready for Results <span class="gradient-text">Like These?</span></h2>
+      <p class="final-cta__body">Let's build a data-driven strategy that delivers measurable growth for your brand.</p>
+      <a href="/contact/" class="cta-button final-cta__button">
+        <span>Start Your Campaign</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  /* Case Study Cards */
+  .case-study {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    overflow: hidden;
+    margin-bottom: var(--space-xl);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .case-study:hover {
+    border-color: var(--color-border-glow);
+    box-shadow: var(--glow-sm);
+  }
+
+  .case-study__header {
+    padding: var(--space-xl) var(--space-xl) var(--space-md);
+  }
+
+  .case-study__industry {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent-solid);
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 6px;
+    margin-bottom: var(--space-sm);
+  }
+
+  .case-study__title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.3;
+  }
+
+  .case-study__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .case-study__narrative {
+    padding: 0 var(--space-xl) var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .case-study__block h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .case-study__block p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .case-study__channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .case-study__channel {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-cyan);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(6, 182, 212, 0.25);
+    border-radius: 20px;
+    background: rgba(6, 182, 212, 0.06);
+  }
+
+  .case-study__metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--color-border);
+    border-left: 1px solid var(--color-border);
+  }
+
+  .case-study__metric {
+    background: var(--color-surface);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.25rem;
+  }
+
+  .case-study__metric-value {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+
+  .case-study__metric-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Final CTA */
+  .final-cta {
+    position: relative;
+    text-align: center;
+    padding: var(--space-3xl) 0;
+    overflow: hidden;
+  }
+
+  .final-cta__mesh {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .final-cta__orb-1 {
+    width: 400px;
+    height: 400px;
+    top: -20%;
+    left: -10%;
+    opacity: 0.2;
+  }
+
+  .final-cta__orb-2 {
+    width: 350px;
+    height: 350px;
+    bottom: -20%;
+    right: -10%;
+    opacity: 0.15;
+  }
+
+  .final-cta__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .final-cta__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .final-cta__body {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .final-cta__button {
+    padding: 1.1rem 3rem;
+    font-size: 1rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .case-study__body {
+      grid-template-columns: 1fr;
+    }
+
+    .case-study__metrics {
+      border-left: none;
+      border-top: 1px solid var(--color-border);
+    }
+  }
+</style>

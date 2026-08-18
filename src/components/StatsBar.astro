@@ -84,3 +84,48 @@ const { stats } = Astro.props;
     }
   }
 </style>
+
+<script>
+  function initCounters() {
+    const values = document.querySelectorAll('.stats-bar__value');
+    if (!values.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const raw = el.getAttribute('data-target') || '';
+            const match = raw.match(/^(\d+)(.*)/);
+            if (!match) return;
+
+            const target = parseInt(match[1], 10);
+            const suffix = match[2]; // e.g. "%", "+", ""
+            const duration = 1500;
+            const start = performance.now();
+
+            function animate(now: number) {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              // Ease-out cubic
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = Math.round(target * eased);
+              el.textContent = current + suffix;
+              if (progress < 1) requestAnimationFrame(animate);
+            }
+
+            el.textContent = '0' + suffix;
+            requestAnimationFrame(animate);
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    values.forEach((v) => observer.observe(v));
+  }
+
+  document.addEventListener('DOMContentLoaded', initCounters);
+  document.addEventListener('astro:page-load', initCounters);
+</script>

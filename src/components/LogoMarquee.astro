@@ -1,0 +1,131 @@
+---
+const platforms = [
+  'The Trade Desk',
+  'Google DV360',
+  'Amazon DSP',
+  'Spotify Ads',
+  'Roku',
+  'Samsung Ads',
+  'Hulu Ad Manager',
+  'iHeart Media',
+  'Pandora',
+  'Yahoo DSP',
+  'LiveRamp',
+  'Xandr',
+];
+---
+
+<section class="logo-marquee reveal">
+  <p class="logo-marquee__label">Trusted Platforms & Partners</p>
+  <div class="logo-marquee__track">
+    <div class="logo-marquee__scroll">
+      {[...platforms, ...platforms].map((name) => (
+        <span class="logo-marquee__item">{name}</span>
+      ))}
+    </div>
+  </div>
+  <div class="logo-marquee__track logo-marquee__track--reverse">
+    <div class="logo-marquee__scroll logo-marquee__scroll--reverse">
+      {[...platforms.slice().reverse(), ...platforms.slice().reverse()].map((name) => (
+        <span class="logo-marquee__item">{name}</span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .logo-marquee {
+    padding: var(--space-lg) 0;
+    overflow: hidden;
+    position: relative;
+    background: var(--color-bg);
+  }
+
+  .logo-marquee__label {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .logo-marquee__track {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+  }
+
+  .logo-marquee__track + .logo-marquee__track {
+    margin-top: 0.75rem;
+  }
+
+  .logo-marquee__scroll {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: marquee 35s linear infinite;
+  }
+
+  .logo-marquee__scroll--reverse {
+    animation: marquee-reverse 40s linear infinite;
+  }
+
+  .logo-marquee__item {
+    flex-shrink: 0;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    opacity: 0.6;
+    transition: opacity var(--transition-fast), color var(--transition-fast);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .logo-marquee__item:hover {
+    opacity: 1;
+    color: var(--color-text-secondary);
+    border-color: var(--color-border-glow);
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  @media (max-width: 768px) {
+    .logo-marquee__item {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.75rem;
+    }
+
+    .logo-marquee__scroll {
+      gap: 1.5rem;
+    }
+  }
+</style>

@@ -7,6 +7,8 @@ import StatsBar from '../components/StatsBar.astro';
 import ServiceGrid from '../components/ServiceGrid.astro';
 import PhilosophyCards from '../components/PhilosophyCards.astro';
 import InsightCard from '../components/InsightCard.astro';
+import LogoMarquee from '../components/LogoMarquee.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('insights');
@@ -131,6 +133,8 @@ const philosophyBlocks = [
     backgroundImage="/images/hero-home.jpg"
   />
 
+  <LogoMarquee />
+
   <StatsBar stats={stats} />
 
   <ServiceGrid
@@ -138,6 +142,8 @@ const philosophyBlocks = [
     titleAccent="Deliver"
     services={digitalServices}
   />
+
+  <ProcessSteps />
 
   <PhilosophyCards blocks={philosophyBlocks} />
 

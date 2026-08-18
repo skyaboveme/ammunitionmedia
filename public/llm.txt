@@ -40,3 +40,27 @@ Ammunition Media is a data-driven digital advertising and media agency led by Jo
 - **Creativity**: Bright, thoughtful ads that resonate with ideal audiences
 - **Strategy**: Data-driven evaluation of consumer touchpoints and marketing channels
 - **Safety**: Contextual relevance ensuring brand-safe, appropriate ad environments
+
+## Our Process
+1. **Discovery** — We learn your business, audience, and goals through an in-depth strategy session
+2. **Strategy** — We design a custom media plan with the right channels, targeting, and budget allocation
+3. **Launch** — Campaigns go live with precision targeting, real-time bidding, and creative optimization
+4. **Optimize** — Continuous measurement, A/B testing, and refinement to maximize ROAS
+
+## Industries We Serve
+- Retail & E-Commerce
+- Healthcare & Pharma
+- Automotive
+- Real Estate
+- Financial Services
+- Entertainment & Media
+
+## Pages
+- Home: https://www.ammunition.media/
+- Services: https://www.ammunition.media/services/
+- Case Studies: https://www.ammunition.media/case-studies/
+- Modern Media: https://www.ammunition.media/modern-media/
+- Insights: https://www.ammunition.media/insights/
+- About: https://www.ammunition.media/about/
+- Industries: https://www.ammunition.media/industries/
+- Contact: https://www.ammunition.media/contact/

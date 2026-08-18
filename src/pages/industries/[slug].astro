@@ -1,0 +1,242 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import { industries } from '../../data/industries';
+import type { IndustryData } from '../../data/industries';
+
+export function getStaticPaths() {
+  return Object.keys(industries).map((slug) => ({
+    params: { slug },
+    props: { industry: industries[slug] },
+  }));
+}
+
+interface Props {
+  industry: IndustryData;
+}
+
+const { industry } = Astro.props;
+---
+
+<BaseLayout
+  title={`${industry.title} Advertising | Ammunition Media`}
+  description={`${industry.heroDescription} Ammunition Media provides modern AdTech solutions for ${industry.title.toLowerCase()} brands.`}
+>
+  <Header slot="header" currentPath="/industries/" />
+
+  <Hero
+    title={industry.title}
+    titleAccent="Advertising"
+    subtitle={industry.heroSubtitle}
+    description={industry.heroDescription}
+    backgroundImage="/images/hero-industries.jpg"
+  />
+
+  <!-- Stats -->
+  <section class="industry-stats reveal">
+    <div class="container industry-stats__inner">
+      {industry.stats.map((stat, i) => (
+        <div class={`industry-stats__item reveal reveal-delay-${i + 1}`}>
+          <span class="industry-stats__value">{stat.value}</span>
+          <span class="industry-stats__label">{stat.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Pain Points -->
+  <section class="pain-points section">
+    <div class="container">
+      <h2 class="pain-points__title reveal">The <span class="gradient-text">Challenges</span></h2>
+      <div class="pain-points__grid">
+        {industry.painPoints.map((pp, i) => (
+          <div class={`pain-points__card glass-card reveal reveal-delay-${i + 1}`}>
+            <span class="pain-points__number">0{i + 1}</span>
+            <h3>{pp.title}</h3>
+            <p>{pp.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommended Channels -->
+  <section class="recommended section">
+    <div class="container">
+      <h2 class="recommended__title reveal">Recommended <span class="gradient-text">Channels</span></h2>
+      <div class="recommended__grid">
+        {industry.channels.map((ch, i) => (
+          <div class={`recommended__card glass-card reveal reveal-delay-${i + 1}`}>
+            <div class="recommended__icon" set:html={ch.icon} />
+            <h3>{ch.name}</h3>
+            <p>{ch.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="final-cta section reveal">
+    <div class="final-cta__mesh">
+      <div class="mesh-orb mesh-orb--indigo final-cta__orb-1"></div>
+      <div class="mesh-orb mesh-orb--pink final-cta__orb-2"></div>
+    </div>
+    <div class="container final-cta__inner">
+      <h2 class="final-cta__title">Ready to Grow Your <span class="gradient-text">{industry.title}</span> Brand?</h2>
+      <p class="final-cta__body">Let's build a custom media strategy tailored to your industry's unique challenges and opportunities.</p>
+      <a href="/contact/" class="cta-button final-cta__button">
+        <span>Schedule Consultation</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  /* Stats */
+  .industry-stats {
+    padding: var(--space-xl) 0;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .industry-stats__inner {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2xl);
+    flex-wrap: wrap;
+  }
+
+  .industry-stats__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 140px;
+  }
+
+  .industry-stats__value {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+
+  .industry-stats__label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Pain Points */
+  .pain-points__title {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-xl);
+  }
+
+  .pain-points__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .pain-points__card {
+    padding: var(--space-xl);
+  }
+
+  .pain-points__number {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.3;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .pain-points__card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .pain-points__card p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Recommended Channels */
+  .recommended__title {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-xl);
+  }
+
+  .recommended__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .recommended__card {
+    padding: var(--space-xl);
+    text-align: center;
+  }
+
+  .recommended__icon {
+    color: var(--color-accent-solid);
+    margin-bottom: var(--space-sm);
+    display: flex;
+    justify-content: center;
+  }
+
+  .recommended__card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .recommended__card p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Final CTA */
+  .final-cta { position: relative; text-align: center; padding: var(--space-3xl) 0; overflow: hidden; }
+  .final-cta__mesh { position: absolute; inset: 0; overflow: hidden; }
+  .final-cta__orb-1 { width: 400px; height: 400px; top: -20%; left: -10%; opacity: 0.2; }
+  .final-cta__orb-2 { width: 350px; height: 350px; bottom: -20%; right: -10%; opacity: 0.15; }
+  .final-cta__inner { position: relative; z-index: 1; max-width: 700px; }
+  .final-cta__title { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: var(--space-md); }
+  .final-cta__body { font-size: 1.05rem; color: var(--color-text-secondary); margin-bottom: var(--space-xl); max-width: 550px; margin-left: auto; margin-right: auto; }
+  .final-cta__button { padding: 1.1rem 3rem; font-size: 1rem; }
+
+  @media (max-width: 768px) {
+    .pain-points__grid,
+    .recommended__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .industry-stats__inner {
+      gap: var(--space-lg);
+    }
+  }
+</style>

@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+
+const industries = [
+  {
+    slug: 'retail-ecommerce',
+    title: 'Retail & E-Commerce',
+    tagline: 'Drive foot traffic and online conversions with omnichannel precision.',
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`,
+  },
+  {
+    slug: 'healthcare-pharma',
+    title: 'Healthcare & Pharma',
+    tagline: 'Reach patients and providers with compliant, targeted advertising.',
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+  },
+  {
+    slug: 'automotive',
+    title: 'Automotive',
+    tagline: 'Accelerate dealership traffic and brand loyalty across every screen.',
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a1 1 0 0 0-.8.4L1.74 11 .85 11.85a1 1 0 0 0-.84.99V16h3"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>`,
+  },
+  {
+    slug: 'real-estate',
+    title: 'Real Estate',
+    tagline: 'Put your properties in front of high-intent buyers and renters.',
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+  },
+  {
+    slug: 'financial-services',
+    title: 'Financial Services',
+    tagline: 'Build trust and acquire high-value clients with precision targeting.',
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  },
+  {
+    slug: 'entertainment-media',
+    title: 'Entertainment & Media',
+    tagline: 'Amplify launches, grow audiences, and drive ticket sales at scale.',
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>`,
+  },
+];
+---
+
+<BaseLayout
+  title="Industries We Serve | Ammunition Media"
+  description="Ammunition Media delivers modern AdTech solutions across Retail, Healthcare, Automotive, Real Estate, Financial Services, and Entertainment. See how we serve your industry."
+>
+  <Header slot="header" currentPath="/industries/" />
+
+  <Hero
+    title="Industries We"
+    titleAccent="Serve"
+    subtitle="Tailored Strategies for Every Vertical"
+    description="Every industry has unique audiences, regulations, and opportunities. We build custom media plans that speak your market's language."
+    backgroundImage="/images/hero-industries.jpg"
+  />
+
+  <!-- Industry Grid -->
+  <section class="industries section">
+    <div class="container">
+      <div class="industries__grid">
+        {industries.map((ind, i) => (
+          <a href={`/industries/${ind.slug}/`} class={`industry-card glass-card reveal reveal-delay-${Math.min(i + 1, 5)}`}>
+            <div class="industry-card__icon" set:html={ind.icon} />
+            <h3>{ind.title}</h3>
+            <p>{ind.tagline}</p>
+            <span class="industry-card__arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="final-cta section reveal">
+    <div class="final-cta__mesh">
+      <div class="mesh-orb mesh-orb--indigo final-cta__orb-1"></div>
+      <div class="mesh-orb mesh-orb--pink final-cta__orb-2"></div>
+    </div>
+    <div class="container final-cta__inner">
+      <h2 class="final-cta__title">Don't See Your <span class="gradient-text">Industry?</span></h2>
+      <p class="final-cta__body">Our AdTech solutions work across every vertical. Let's discuss how we can help your brand.</p>
+      <a href="/contact/" class="cta-button final-cta__button">
+        <span>Talk to Us</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .industries__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .industry-card {
+    padding: var(--space-xl);
+    text-decoration: none;
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .industry-card__icon {
+    color: var(--color-accent-solid);
+    margin-bottom: var(--space-md);
+  }
+
+  .industry-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .industry-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .industry-card__arrow {
+    display: flex;
+    align-items: center;
+    margin-top: var(--space-md);
+    color: var(--color-accent-solid);
+    transition: transform var(--transition-fast);
+  }
+
+  .industry-card:hover .industry-card__arrow {
+    transform: translateX(4px);
+  }
+
+  /* Final CTA */
+  .final-cta {
+    position: relative;
+    text-align: center;
+    padding: var(--space-3xl) 0;
+    overflow: hidden;
+  }
+
+  .final-cta__mesh { position: absolute; inset: 0; overflow: hidden; }
+  .final-cta__orb-1 { width: 400px; height: 400px; top: -20%; left: -10%; opacity: 0.2; }
+  .final-cta__orb-2 { width: 350px; height: 350px; bottom: -20%; right: -10%; opacity: 0.15; }
+  .final-cta__inner { position: relative; z-index: 1; max-width: 700px; }
+  .final-cta__title { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: var(--space-md); }
+  .final-cta__body { font-size: 1.05rem; color: var(--color-text-secondary); margin-bottom: var(--space-xl); max-width: 550px; margin-left: auto; margin-right: auto; }
+  .final-cta__button { padding: 1.1rem 3rem; font-size: 1rem; }
+
+  @media (max-width: 968px) {
+    .industries__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .industries__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
