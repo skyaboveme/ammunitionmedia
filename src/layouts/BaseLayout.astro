@@ -11,7 +11,7 @@ export interface Props {
 
 const {
   title,
-  description = 'Ammunition Media offers data-driven digital marketing and targeted advertising solutions. Modern AdTech for ambitious brands — CTV, Digital Audio, Programmatic, Identity Resolution, DOOH, and Retail Media.',
+  description = 'Ammunition Media offers data-driven digital marketing and targeted advertising solutions. Modern AdTech for ambitious brands - CTV, Digital Audio, Programmatic, Identity Resolution, DOOH, and Retail Media.',
   ogImage = '/images/logo.png',
   canonicalUrl,
   type = 'website',
@@ -20,28 +20,113 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://www.ammunition.media';
-const fullTitle = title.includes('Ammunition Media') ? title : `${title} — Ammunition Media`;
+const fullTitle = title.includes('Ammunition Media') ? title : `${title} - Ammunition Media`;
 const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).toString();
 
-const jsonLd = {
+// Build breadcrumbs from URL path
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbItems = [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+  ...pathSegments.map((seg, i) => ({
+    '@type': 'ListItem',
+    position: i + 2,
+    name: seg.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+    item: `${siteUrl}/${pathSegments.slice(0, i + 1).join('/')}/`,
+  })),
+];
+
+// Organization Schema (comprehensive)
+const orgSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
   name: 'Ammunition Media',
+  alternateName: 'Ammunition Media LLC',
   url: siteUrl,
-  description: 'Modern AdTech for Ambitious Brands. Data-driven digital advertising solutions — CTV, Digital Audio, Programmatic, Identity Resolution, DOOH, and Retail Media.',
+  logo: `${siteUrl}/images/logo.png`,
+  slogan: 'Modern AdTech for Ambitious Brands',
+  description: 'Ammunition Media is a data-driven digital advertising agency specializing in Connected Television (CTV), Digital Audio, Programmatic Display, Identity Resolution, Digital Out of Home (DOOH), and Retail Media Networks. We deliver AI-ready GEO websites and full-funnel media strategies for ambitious brands.',
   founder: {
     '@type': 'Person',
+    '@id': `${siteUrl}/#founder`,
     name: 'John Mark Rankins',
+    jobTitle: 'Founder & CEO',
+    worksFor: { '@id': `${siteUrl}/#organization` },
   },
   contactPoint: {
     '@type': 'ContactPoint',
     email: 'johnmark@ammunition.media',
     contactType: 'sales',
+    availableLanguage: 'English',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Toledo', addressRegion: 'OH', addressCountry: 'US' },
+    { '@type': 'City', name: 'Beaufort', addressRegion: 'SC', addressCountry: 'US' },
+    { '@type': 'Country', name: 'United States' },
+  ],
+  address: [
+    { '@type': 'PostalAddress', addressLocality: 'Toledo', addressRegion: 'OH', addressCountry: 'US' },
+    { '@type': 'PostalAddress', addressLocality: 'Beaufort', addressRegion: 'SC', addressCountry: 'US' },
+  ],
+  knowsAbout: [
+    'Connected Television Advertising', 'CTV', 'OTT Advertising',
+    'Programmatic Display Advertising', 'Digital Audio Advertising',
+    'Identity Resolution', 'Digital Out of Home', 'DOOH',
+    'Retail Media Networks', 'Generative Engine Optimization', 'GEO',
+    'AI Search Visibility', 'Search Engine Optimization', 'SEO',
+    'AdTech', 'Data-Driven Marketing',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Ammunition Media Services',
+    itemListElement: [
+      { '@type': 'Service', name: 'Connected Television (CTV)', description: 'Streaming TV ads with household-level precision and cross-screen attribution' },
+      { '@type': 'Service', name: 'Digital Audio', description: 'Podcast and streaming music advertising with dynamic insertion' },
+      { '@type': 'Service', name: 'Programmatic Display, Native & Video', description: 'Real-time bidding, contextual targeting, and cross-device reach' },
+      { '@type': 'Service', name: 'Identity Resolution', description: 'Cross-device matching, cookie-free solutions, and unified customer view' },
+      { '@type': 'Service', name: 'Digital Out of Home (DOOH)', description: 'Programmatic billboard ads, location-based targeting' },
+      { '@type': 'Service', name: 'Retail Media Networks', description: 'Shopper marketing, first-party retail data, and closed-loop attribution' },
+      { '@type': 'Service', name: 'GEO Website', description: 'AI-ready website design with Generative Engine Optimization starting at $2,500', offers: { '@type': 'Offer', price: '2500', priceCurrency: 'USD' } },
+    ],
   },
   sameAs: [
     'https://www.linkedin.com/in/johnmarkrankins/',
   ],
+};
+
+// BreadcrumbList Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems,
+};
+
+// WebPage Schema
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': type === 'article' ? 'Article' : 'WebPage',
+  name: fullTitle,
+  description,
+  url: canonical,
+  inLanguage: 'en-US',
+  isPartOf: { '@id': `${siteUrl}/#website` },
+  about: { '@id': `${siteUrl}/#organization` },
+  ...(author && { author: { '@type': 'Person', name: author } }),
+  ...(datePublished && { datePublished }),
+  publisher: { '@id': `${siteUrl}/#organization` },
+  breadcrumb: { '@id': `${canonical}#breadcrumb` },
+};
+
+// WebSite Schema
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  name: 'Ammunition Media',
+  url: siteUrl,
+  publisher: { '@id': `${siteUrl}/#organization` },
+  inLanguage: 'en-US',
 };
 ---
 
@@ -63,15 +148,19 @@ const jsonLd = {
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content={type} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
     {author && <meta name="author" content={author} />}
     {datePublished && <meta itemprop="datePublished" content={datePublished} />}
+
+    <!-- AI Crawler Directives -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
     <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -80,8 +169,17 @@ const jsonLd = {
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <!-- Sitemap Discovery -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    <!-- JSON-LD: WebSite -->
+    <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
+    <!-- JSON-LD: WebPage -->
+    <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+    <!-- JSON-LD: Breadcrumbs -->
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
     <!-- Global Styles -->
     <style is:global>

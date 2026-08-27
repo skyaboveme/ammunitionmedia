@@ -22,12 +22,12 @@ const locations = [
 const values = [
   {
     title: 'Data-Driven Decisions',
-    description: 'Every recommendation is backed by real-time analytics and audience intelligence. We don\'t guess — we measure.',
+    description: 'Every recommendation is backed by real-time analytics and audience intelligence. We don\'t guess - we measure.',
     icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>`,
   },
   {
     title: 'Channel Agnostic',
-    description: 'We go where your audience is — CTV, audio, display, DOOH, or retail media. No channel bias, just results.',
+    description: 'We go where your audience is - CTV, audio, display, DOOH, or retail media. No channel bias, just results.',
     icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`,
   },
   {
@@ -62,13 +62,12 @@ const values = [
     <div class="container">
       <div class="founder__grid reveal">
         <div class="founder__image-wrap">
-          <div class="founder__coming-soon">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-              <circle cx="12" cy="13" r="4"/>
-            </svg>
-            <span>Coming Soon</span>
-          </div>
+          <img
+            src="/images/johnmark-headshot.jpg"
+            alt="John Mark Rankins - Founder, Ammunition Media"
+            class="founder__image"
+            loading="lazy"
+          />
           <div class="founder__image-glow" aria-hidden="true"></div>
         </div>
         <div class="founder__content">
@@ -76,7 +75,7 @@ const values = [
           <h2 class="founder__name">John Mark <span class="gradient-text">Rankins</span></h2>
           <p>John Mark Rankins founded Ammunition Media with a clear mission: to make enterprise-grade advertising technology accessible to ambitious brands of every size.</p>
           <p>With deep expertise in programmatic media, identity resolution, and multi-channel campaign strategy, John Mark has spent his career at the intersection of data science and creative storytelling.</p>
-          <p>His approach is simple — combine the precision of modern AdTech with the art of compelling creative to deliver measurable business outcomes that scale.</p>
+          <p>His approach is simple - combine the precision of modern AdTech with the art of compelling creative to deliver measurable business outcomes that scale.</p>
           <div class="founder__connect">
             <a href="https://www.linkedin.com/in/johnmarkrankins/" target="_blank" rel="noopener noreferrer" class="founder__linkedin">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -172,36 +171,13 @@ const values = [
     position: relative;
   }
 
-  .founder__coming-soon {
+  .founder__image {
     width: 100%;
-    aspect-ratio: 3 / 4;
     border-radius: 20px;
     border: 1px solid var(--glass-border);
-    background: var(--glass-bg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-sm);
     position: relative;
     z-index: 1;
-  }
-
-  .founder__coming-soon svg {
-    color: var(--color-text-muted);
-    opacity: 0.6;
-  }
-
-  .founder__coming-soon span {
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    object-fit: cover;
   }
 
   .founder__image-glow {

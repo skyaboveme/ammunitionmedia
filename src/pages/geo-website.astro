@@ -1,0 +1,1765 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+
+const pillars = [
+  {
+    number: '01',
+    title: 'Technical Architecture & Crawler Accessibility',
+    tagline: 'Built for Machines That Recommend',
+    description: 'AI search engines don\'t browse - they crawl, parse, and index structured data at scale. Your site must be instantly interpretable by every AI agent and LLM-powered search engine in the market.',
+    features: [
+      'llm.txt & llms.txt AI-visibility manifests',
+      'JSON-LD Schema.org structured data (Organization, LocalBusiness, Product, FAQ)',
+      'Clean semantic HTML5 with logical heading hierarchy',
+      'Sub-2s Core Web Vitals (LCP, CLS, INP)',
+      'Static-first architecture (Astro/Next.js SSG)',
+      'XML Sitemap, robots.txt, and canonical URL strategy',
+      'Mobile-first responsive design',
+      'Edge-deployed on Cloudflare for global <50ms TTFB',
+    ],
+    icon: `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>`,
+  },
+  {
+    number: '02',
+    title: 'Semantic Structure & Information Design',
+    tagline: 'Architected for AI Comprehension',
+    description: 'When ChatGPT, Perplexity, or Google AI Overview answers a question about your industry, your website should be the source they cite. That requires surgical information architecture.',
+    features: [
+      'Topic cluster architecture with hub-and-spoke internal linking',
+      'Entity-first content modeling (People, Services, Locations)',
+      'Definitive H1 → H2 → H3 heading hierarchy per page',
+      'FAQ schema and Q&A content patterns',
+      'Breadcrumb navigation with structured data',
+      'Strategic keyword-to-entity mapping',
+      'Contextual internal linking strategy',
+      'Purpose-built landing pages for each service and audience',
+    ],
+    icon: `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+  },
+  {
+    number: '03',
+    title: 'Content Authority & "Information Gain"',
+    tagline: 'The Source, Not the Echo',
+    description: 'AI models are trained on the internet. Generic content gets compressed into noise. To be cited, your content must deliver original insight, proprietary data, and definitive expertise that AI can\'t synthesize from other sources.',
+    features: [
+      'Proprietary framework and methodology documentation',
+      'Data-driven case studies with specific metrics',
+      'Original research, benchmarks, and industry analysis',
+      'Author bio with E-E-A-T (Experience, Expertise, Authority, Trust) signals',
+      'Long-form pillar content (2,000+ words per topic)',
+      'Strategic use of tables, lists, and structured answers',
+      'Regularly updated content with freshness signals',
+      'Multimedia content integration (video, infographics, data viz)',
+    ],
+    icon: `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+  },
+  {
+    number: '04',
+    title: 'Off-Page Entity Footprint',
+    tagline: 'Own Your Identity Across the AI Web',
+    description: 'AI models build entity graphs from the entire web - not just your site. Your brand must have a consistent, authoritative presence across the platforms and databases that LLMs reference.',
+    features: [
+      'Google Business Profile optimization',
+      'LinkedIn company + founder profile alignment',
+      'Wikipedia/Wikidata entity seeding strategy',
+      'Industry directory and citation building',
+      'Press release and earned media distribution',
+      'Consistent NAP (Name, Address, Phone) across 50+ directories',
+      'Social profile verification and cross-linking',
+      'Brand mention monitoring and response strategy',
+    ],
+    icon: `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
+  },
+];
+
+const deliverables = [
+  'Custom-designed, mobile-first website (up to 10 pages)',
+  'Complete llm.txt / llms.txt AI-visibility implementation',
+  'JSON-LD structured data on every page',
+  'SEO-optimized copy with entity-first content strategy',
+  'Core Web Vitals optimization (90+ Lighthouse score)',
+  'Google Analytics 4 + Search Console setup',
+  'XML Sitemap, robots.txt, and canonical strategy',
+  'Cloudflare Pages deployment with global CDN',
+  '30-day post-launch support and optimization',
+  'AI Search visibility audit and recommendations report',
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'I already have SEO. Why do I need GEO?',
+      acceptedAnswer: { '@type': 'Answer', text: 'SEO optimizes for Google\'s ranking algorithm. GEO optimizes for AI comprehension. When a user asks ChatGPT "who\'s the best [your service] in [your city]?" - SEO won\'t help. Your site needs to be structured so AI can understand, trust, and cite you. They\'re complementary, not interchangeable.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can\'t I just add schema to my existing site?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Schema is one piece of a 50-piece puzzle. A GEO website isn\'t a plugin - it\'s an architecture. The semantic HTML, content strategy, entity mapping, llm.txt manifests, and information hierarchy all need to work together. Bolting schema onto a poorly structured site is like putting racing tires on a minivan.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is this different from regular web design?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A regular web designer builds for humans looking at screens. We build for both humans AND the AI agents that recommend you. Every heading, every content block, every metadata declaration is engineered for machine comprehension - while still looking stunning to human visitors.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long until I see results?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Traditional SEO takes 3-6 months. GEO results can appear faster because AI search engines re-crawl frequently and don\'t rely on backlink authority the same way Google does. Most clients see AI citations within 30-60 days of launch, with compounding visibility over the following months.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What if AI search doesn\'t take off?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Every GEO technique we implement also improves traditional SEO. Structured data, fast load times, semantic HTML, and quality content help you rank on Google too. You\'re not betting on one future - you\'re winning in both.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you redesign my existing site or build new?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Both. If your current site has strong branding and content, we can retrofit GEO architecture into it. If you need a fresh start, we build from scratch on our proven AI-ready tech stack. Either way, the end result is a website that AI search engines can fully understand and cite.' },
+    },
+  ],
+};
+
+const geoServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'GEO Website',
+  description: 'A complete AI-ready website built for Generative Engine Optimization. Technical architecture, semantic structure, content authority, and off-page entity footprint engineered for AI search citation.',
+  provider: {
+    '@type': 'Organization',
+    name: 'Ammunition Media',
+    url: 'https://www.ammunition.media',
+  },
+  areaServed: { '@type': 'Country', name: 'United States' },
+  offers: {
+    '@type': 'Offer',
+    price: '2500',
+    priceCurrency: 'USD',
+    priceValidUntil: '2027-12-31',
+    availability: 'https://schema.org/InStock',
+  },
+  serviceType: 'Generative Engine Optimization',
+  category: 'Web Design & AI Search Optimization',
+};
+---
+
+<BaseLayout
+  title="GEO Website - AI-Ready Web Design | Ammunition Media"
+  description="A complete AI-ready website built for Generative Engine Optimization. Technical architecture, semantic structure, content authority, and entity footprint - starting at $2,500."
+>
+  <!-- GEO Page Schemas -->
+  <script slot="header" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script slot="header" type="application/ld+json" set:html={JSON.stringify(geoServiceSchema)} />
+  <Header slot="header" currentPath="/geo-website/" />
+
+  <Hero
+    title="GEO"
+    titleAccent="Website"
+    subtitle="Built for the AI Search Era"
+    description="Your website isn't just for humans anymore. AI search engines, LLMs, and generative agents are the new gatekeepers. We build websites with AI in the bones."
+    backgroundImage="/images/hero-geo-website.jpg"
+  />
+
+  <!-- What is GEO -->
+  <section class="geo-intro section" id="geo-intro">
+    <div class="container">
+      <div class="geo-intro__grid reveal">
+        <div class="geo-intro__content">
+          <span class="section-label">Generative Engine Optimization</span>
+          <h2>What is a <span class="gradient-text">GEO Website?</span></h2>
+          <p>Traditional SEO gets you ranked. <strong>GEO gets you cited.</strong></p>
+          <p>When a user asks ChatGPT, Perplexity, Google AI Overview, or any AI-powered search engine a question about your industry - your brand should be the answer. Not buried on page two. Not paraphrased without attribution. <em>Cited as the authoritative source.</em></p>
+          <p>A GEO Website is engineered from the ground up with AI-native architecture. Every line of code, every content decision, every schema declaration is designed to make your brand <strong>the definitive entity</strong> that AI models reference.</p>
+        </div>
+        <div class="geo-intro__stats">
+          <div class="geo-stat glass-card">
+            <span class="geo-stat__value">68%</span>
+            <span class="geo-stat__label">of searches will be AI-mediated by 2027</span>
+          </div>
+          <div class="geo-stat glass-card">
+            <span class="geo-stat__value">2%</span>
+            <span class="geo-stat__label">of traditional websites are optimized for AI search</span>
+          </div>
+          <div class="geo-stat glass-card">
+            <span class="geo-stat__value">4x</span>
+            <span class="geo-stat__label">higher citation rate with proper AI-visibility architecture</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- What You Get -->
+  <section class="deliverables section" id="pricing">
+    <div class="container">
+      <div class="deliverables__grid reveal">
+        <div class="deliverables__content">
+          <span class="section-label">The Package</span>
+          <h2>What's <span class="gradient-text">Included</span></h2>
+          <ul class="deliverables__list">
+            {deliverables.map((item) => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="deliverables__pricing">
+          <div class="pricing-card glass-card">
+            <span class="pricing-card__label">GEO Website Package</span>
+            <div class="pricing-card__price">
+              <span class="pricing-card__currency">$</span>
+              <span class="pricing-card__amount">2,500</span>
+            </div>
+            <span class="pricing-card__starting">Starting at</span>
+            <div class="pricing-card__divider"></div>
+            <ul class="pricing-card__highlights">
+              <li>Up to 10 pages</li>
+              <li>AI-native architecture</li>
+              <li>Full SEO + GEO optimization</li>
+              <li>30-day post-launch support</li>
+              <li>4–6 week delivery</li>
+            </ul>
+            <a href="/contact/" class="cta-button pricing-card__cta">
+              <span>Get Started</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <p class="pricing-card__note">Custom quotes for larger sites and enterprise needs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Before/After AI Visibility -->
+  <section class="visibility section">
+    <div class="container">
+      <div class="visibility__header reveal">
+        <span class="section-label">The Problem</span>
+        <h2>What AI Search Engines <span class="gradient-text">Actually See</span></h2>
+        <p class="visibility__subtitle">Most websites are invisible to AI. Here's the difference between a traditional website and a GEO-optimized one.</p>
+      </div>
+
+      <div class="visibility__comparison reveal">
+        <div class="visibility__panel visibility__panel--before">
+          <div class="visibility__panel-header visibility__panel-header--red">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <span>Traditional Website</span>
+          </div>
+          <div class="visibility__terminal">
+            <div class="terminal-line terminal-line--comment">// What ChatGPT sees when crawling your site:</div>
+            <div class="terminal-line terminal-line--dim">{'{"name": "???", "type": "???", "services": "???"}'}</div>
+            <div class="terminal-line terminal-line--dim">No structured data found.</div>
+            <div class="terminal-line terminal-line--dim">No llm.txt manifest.</div>
+            <div class="terminal-line terminal-line--dim">No entity relationships.</div>
+            <div class="terminal-line terminal-line--dim">No author authority signals.</div>
+            <div class="terminal-line terminal-line--error">Result: NOT CITED in AI responses</div>
+          </div>
+        </div>
+
+        <div class="visibility__vs">VS</div>
+
+        <div class="visibility__panel visibility__panel--after">
+          <div class="visibility__panel-header visibility__panel-header--green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>GEO Website</span>
+          </div>
+          <div class="visibility__terminal">
+            <div class="terminal-line terminal-line--comment">// What ChatGPT sees when crawling your GEO site:</div>
+            <div class="terminal-line terminal-line--success">{'{"@type": "Organization", "name": "Your Brand"}'}</div>
+            <div class="terminal-line terminal-line--success">llm.txt: Services, team, methodology loaded</div>
+            <div class="terminal-line terminal-line--success">FAQ schema: 12 questions indexed</div>
+            <div class="terminal-line terminal-line--success">Author E-E-A-T: Verified expertise signals</div>
+            <div class="terminal-line terminal-line--success">Entity graph: 47 relationships mapped</div>
+            <div class="terminal-line terminal-line--highlight">Result: CITED as authoritative source ✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Platform Logo Strip -->
+  <section class="ai-platforms section">
+    <div class="container">
+      <div class="ai-platforms__header reveal">
+        <span class="section-label">Optimized For</span>
+        <h2>Built to Be <span class="gradient-text">Cited By</span></h2>
+      </div>
+      <div class="ai-platforms__grid reveal">
+        <div class="ai-platform glass-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+          <span>ChatGPT</span>
+        </div>
+        <div class="ai-platform glass-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M6 12h12"/></svg>
+          <span>Google AI Overview</span>
+        </div>
+        <div class="ai-platform glass-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Perplexity</span>
+        </div>
+        <div class="ai-platform glass-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Claude</span>
+        </div>
+        <div class="ai-platform glass-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <span>Gemini</span>
+        </div>
+        <div class="ai-platform glass-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+          <span>Bing Copilot</span>
+        </div>
+      </div>
+      <p class="ai-platforms__note reveal">Plus every future AI search engine, voice assistant, and recommendation agent built on LLM technology.</p>
+    </div>
+  </section>
+
+  <!-- Live Code Comparison -->
+  <section class="code-compare section">
+    <div class="container">
+      <div class="code-compare__header reveal">
+        <span class="section-label">Under The Hood</span>
+        <h2>The Code <span class="gradient-text">Difference</span></h2>
+        <p class="code-compare__subtitle">This is what separates a website that gets <em>found</em> from one that gets <em>cited</em>.</p>
+      </div>
+
+      <div class="code-compare__grid reveal">
+        <div class="code-compare__block">
+          <div class="code-compare__label code-compare__label--dim">Traditional Website</div>
+          <pre class="code-compare__code"><code set:html={`&lt;div class="header"&gt;
+  &lt;div class="logo"&gt;My Business&lt;/div&gt;
+  &lt;div class="nav"&gt;Home | About | Contact&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="content"&gt;
+  &lt;div class="title"&gt;Welcome to My Business&lt;/div&gt;
+  &lt;div class="text"&gt;We do great things...&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- No schema. No structure. No AI signals. --&gt;`} /></pre>
+        </div>
+
+        <div class="code-compare__block">
+          <div class="code-compare__label code-compare__label--glow">GEO Website</div>
+          <pre class="code-compare__code code-compare__code--geo"><code set:html={`&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Your Brand",
+  "founder": {"@type": "Person", "name": "..."},
+  "service": [{"@type": "Service", "name": "..."}],
+  "areaServed": {"@type": "City", "name": "..."}
+}
+&lt;/script&gt;
+
+&lt;!-- llm.txt: AI-readable brand manifest --&gt;
+&lt;!-- Semantic HTML5 + ARIA landmarks --&gt;
+&lt;!-- FAQ Schema on every service page --&gt;
+&lt;!-- E-E-A-T author attribution --&gt;`} /></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="compare-table section">
+    <div class="container">
+      <div class="compare-table__header reveal">
+        <span class="section-label">Side By Side</span>
+        <h2>Traditional vs. <span class="gradient-text">GEO Website</span></h2>
+      </div>
+
+      <div class="compare-table__wrap reveal">
+        <table class="compare-table__table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Traditional</th>
+              <th class="compare-table__geo-col">GEO Website</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Google search visibility</td>
+              <td class="compare-table__partial">Basic</td>
+              <td class="compare-table__yes">Advanced</td>
+            </tr>
+            <tr>
+              <td>AI search citation (ChatGPT, Perplexity)</td>
+              <td class="compare-table__no">✗</td>
+              <td class="compare-table__yes">✓</td>
+            </tr>
+            <tr>
+              <td>JSON-LD structured data</td>
+              <td class="compare-table__no">✗</td>
+              <td class="compare-table__yes">✓</td>
+            </tr>
+            <tr>
+              <td>llm.txt / llms.txt AI manifest</td>
+              <td class="compare-table__no">✗</td>
+              <td class="compare-table__yes">✓</td>
+            </tr>
+            <tr>
+              <td>Semantic HTML5 architecture</td>
+              <td class="compare-table__partial">Partial</td>
+              <td class="compare-table__yes">Full</td>
+            </tr>
+            <tr>
+              <td>Entity graph optimization</td>
+              <td class="compare-table__no">✗</td>
+              <td class="compare-table__yes">✓</td>
+            </tr>
+            <tr>
+              <td>FAQ schema</td>
+              <td class="compare-table__no">✗</td>
+              <td class="compare-table__yes">✓</td>
+            </tr>
+            <tr>
+              <td>E-E-A-T author signals</td>
+              <td class="compare-table__no">✗</td>
+              <td class="compare-table__yes">✓</td>
+            </tr>
+            <tr>
+              <td>Core Web Vitals optimized</td>
+              <td class="compare-table__partial">Sometimes</td>
+              <td class="compare-table__yes">Always (90+)</td>
+            </tr>
+            <tr>
+              <td>Edge CDN deployment</td>
+              <td class="compare-table__no">Rare</td>
+              <td class="compare-table__yes">Standard</td>
+            </tr>
+            <tr>
+              <td>Off-page entity footprint</td>
+              <td class="compare-table__no">✗</td>
+              <td class="compare-table__yes">✓</td>
+            </tr>
+            <tr>
+              <td>Future-proof for AI search</td>
+              <td class="compare-table__no">✗</td>
+              <td class="compare-table__yes">✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="geo-faq section" id="geo-faq">
+    <div class="container">
+      <div class="geo-faq__header reveal">
+        <span class="section-label">Common Questions</span>
+        <h2>Frequently <span class="gradient-text">Asked</span></h2>
+      </div>
+
+      <div class="geo-faq__grid reveal">
+        <div class="geo-faq__item glass-card">
+          <h3>"I already have SEO. Why do I need GEO?"</h3>
+          <p>SEO optimizes for Google's ranking algorithm. GEO optimizes for AI comprehension. When a user asks ChatGPT "who's the best [your service] in [your city]?" - SEO won't help. Your site needs to be structured so AI can understand, trust, and cite you. They're complementary, not interchangeable.</p>
+        </div>
+        <div class="geo-faq__item glass-card">
+          <h3>"Can't I just add schema to my existing site?"</h3>
+          <p>Schema is one piece of a 50-piece puzzle. A GEO website isn't a plugin - it's an architecture. The semantic HTML, content strategy, entity mapping, llm.txt manifests, and information hierarchy all need to work together. Bolting schema onto a poorly structured site is like putting racing tires on a minivan.</p>
+        </div>
+        <div class="geo-faq__item glass-card">
+          <h3>"How is this different from regular web design?"</h3>
+          <p>A regular web designer builds for humans looking at screens. We build for both humans AND the AI agents that recommend you. Every heading, every content block, every metadata declaration is engineered for machine comprehension - while still looking stunning to human visitors.</p>
+        </div>
+        <div class="geo-faq__item glass-card">
+          <h3>"How long until I see results?"</h3>
+          <p>Traditional SEO takes 3-6 months. GEO results can appear faster because AI search engines re-crawl frequently and don't rely on backlink authority the same way Google does. Most clients see AI citations within 30-60 days of launch, with compounding visibility over the following months.</p>
+        </div>
+        <div class="geo-faq__item glass-card">
+          <h3>"What if AI search doesn't take off?"</h3>
+          <p>Every GEO technique we implement also improves traditional SEO. Structured data, fast load times, semantic HTML, and quality content help you rank on Google too. You're not betting on one future - you're winning in both.</p>
+        </div>
+        <div class="geo-faq__item glass-card">
+          <h3>"Do you redesign my existing site or build new?"</h3>
+          <p>Both. If your current site has strong branding and content, we can retrofit GEO architecture into it. If you need a fresh start, we build from scratch on our proven AI-ready tech stack. Either way, the end result is a website that AI search engines can fully understand and cite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="social-proof section">
+    <div class="container">
+      <div class="social-proof__card glass-card reveal">
+        <div class="social-proof__badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Built With What We Preach</span>
+        </div>
+        <p class="social-proof__text">This website - ammunition.media - is a GEO website. It runs on the exact same architecture, schema, and AI-visibility stack we build for our clients. Every llm.txt manifest, every JSON-LD declaration, every semantic structure you see here is what you'll get.</p>
+        <div class="social-proof__proof">
+          <a href="/llm.txt" target="_blank" class="social-proof__link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View our llm.txt
+          </a>
+          <a href="/llms.txt" target="_blank" class="social-proof__link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View our llms.txt
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Pill Nav -->
+  <nav class="pill-nav" id="pill-nav" aria-label="Page sections">
+    <a href="#geo-intro" class="pill-nav__item" data-section="geo-intro">What is GEO</a>
+    <a href="#bento" class="pill-nav__item" data-section="bento">Features</a>
+    <a href="#roi-calc" class="pill-nav__item" data-section="roi-calc">ROI</a>
+    <a href="#pricing" class="pill-nav__item" data-section="pricing">Pricing</a>
+    <a href="#geo-faq" class="pill-nav__item" data-section="geo-faq">FAQ</a>
+  </nav>
+
+  <!-- Bento Box Feature Grid -->
+  <section class="bento section" id="bento">
+    <div class="container">
+      <div class="bento__header reveal">
+        <span class="neo-label">WHAT YOU GET</span>
+        <h2 class="neo-heading">AI in the <span class="lime-text">Bones.</span></h2>
+      </div>
+
+      <div class="bento__grid reveal">
+        <div class="bento__card bento__card--lg">
+          <span class="bento__tag">ARCHITECTURE</span>
+          <h3>llm.txt Manifest</h3>
+          <p>A machine-readable blueprint of your brand that AI search engines parse instantly. Your services, team, methodology - structured for LLMs.</p>
+          <div class="bento__accent" aria-hidden="true">
+            <code>GET /llm.txt 200 OK</code>
+          </div>
+        </div>
+
+        <div class="bento__card">
+          <span class="bento__tag">SCHEMA</span>
+          <h3>JSON-LD on Every Page</h3>
+          <p>Organization, Service, FAQ, BreadcrumbList, Person - fully interconnected entity graph.</p>
+        </div>
+
+        <div class="bento__card">
+          <span class="bento__tag">SPEED</span>
+          <h3>Sub-2s Load</h3>
+          <p>Static-first architecture deployed to 300+ global edge nodes. LCP under 1.5s.</p>
+          <div class="bento__metric">
+            <span class="bento__metric-value">96</span>
+            <span class="bento__metric-label">Lighthouse</span>
+          </div>
+        </div>
+
+        <div class="bento__card">
+          <span class="bento__tag">CONTENT</span>
+          <h3>E-E-A-T Signals</h3>
+          <p>Author attribution, expertise markers, and trust indicators that AI models weight heavily.</p>
+        </div>
+
+        <div class="bento__card bento__card--lg">
+          <span class="bento__tag">ENTITY</span>
+          <h3>Knowledge Graph Seeding</h3>
+          <p>We build your brand's entity footprint across Google Business Profile, LinkedIn, Wikidata, and 50+ directories - so every AI model recognizes you as a distinct, authoritative entity.</p>
+          <div class="bento__accent" aria-hidden="true">
+            <code>entity_confidence: 0.97</code>
+          </div>
+        </div>
+
+        <div class="bento__card">
+          <span class="bento__tag">SEMANTIC</span>
+          <h3>Topic Clusters</h3>
+          <p>Hub-and-spoke content architecture that AI models interpret as topical authority.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Calculator -->
+  <section class="roi-calc section" id="roi-calc">
+    <div class="container">
+      <div class="roi-calc__header reveal">
+        <span class="neo-label">ESTIMATE YOUR RETURN</span>
+        <h2 class="neo-heading">What's AI Visibility <span class="lime-text">Worth?</span></h2>
+        <p class="roi-calc__subtitle">Adjust the slider to see how AI search citations translate to real business value.</p>
+      </div>
+
+      <div class="roi-calc__card reveal">
+        <div class="roi-calc__input-group">
+          <label for="traffic-slider" class="roi-calc__label">
+            Monthly Website Visitors
+            <span class="roi-calc__current-value" id="traffic-value">5,000</span>
+          </label>
+          <input
+            type="range"
+            id="traffic-slider"
+            min="1000"
+            max="100000"
+            value="5000"
+            step="1000"
+            class="roi-calc__slider"
+          />
+          <div class="roi-calc__range-labels">
+            <span>1K</span>
+            <span>50K</span>
+            <span>100K</span>
+          </div>
+        </div>
+
+        <div class="roi-calc__results">
+          <div class="roi-calc__result">
+            <span class="roi-calc__result-label">Estimated Monthly AI Citations</span>
+            <span class="roi-calc__result-value" id="citations-result">340</span>
+          </div>
+          <div class="roi-calc__result">
+            <span class="roi-calc__result-label">Additional Monthly Visitors from AI</span>
+            <span class="roi-calc__result-value" id="visitors-result">1,190</span>
+          </div>
+          <div class="roi-calc__result roi-calc__result--highlight">
+            <span class="roi-calc__result-label">Estimated Monthly Revenue Impact</span>
+            <span class="roi-calc__result-value" id="revenue-result">$5,950</span>
+          </div>
+        </div>
+
+        <p class="roi-calc__disclaimer">Estimates based on industry averages: 6.8% AI citation rate, 3.5x click-through multiplier, $5 average revenue per visitor. Actual results vary.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Four Pillars -->
+  <section class="pillars section">
+    <div class="container">
+      <div class="pillars__header reveal">
+        <span class="section-label">The Framework</span>
+        <h2>Four Pillars of <span class="gradient-text">AI Visibility</span></h2>
+        <p class="pillars__subtitle">Every GEO Website is built on these four foundational pillars - each one essential for AI search engines to discover, understand, trust, and cite your brand.</p>
+      </div>
+
+      {pillars.map((pillar, i) => (
+        <div class={`pillar reveal`}>
+          <div class="pillar__header">
+            <div class="pillar__icon-wrap">
+              <span class="pillar__number">{pillar.number}</span>
+              <div class="pillar__icon" set:html={pillar.icon} />
+            </div>
+            <div>
+              <h3 class="pillar__title">{pillar.title}</h3>
+              <span class="pillar__tagline">{pillar.tagline}</span>
+            </div>
+          </div>
+          <p class="pillar__description">{pillar.description}</p>
+          <ul class="pillar__features">
+            {pillar.features.map((feat) => (
+              <li>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{feat}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="final-cta section reveal">
+    <div class="final-cta__mesh">
+      <div class="mesh-orb mesh-orb--indigo final-cta__orb-1"></div>
+      <div class="mesh-orb mesh-orb--pink final-cta__orb-2"></div>
+    </div>
+    <div class="container final-cta__inner">
+      <h2 class="final-cta__title">Is Your Website <span class="gradient-text">AI-Ready?</span></h2>
+      <p class="final-cta__body">Most websites are invisible to AI search engines. Let's fix that.</p>
+      <a href="/contact/" class="cta-button final-cta__button">
+        <span>Schedule a GEO Audit</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  /* Section Label */
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-accent-solid);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* GEO Intro */
+  .geo-intro__grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .geo-intro__content h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .geo-intro__content p {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+  }
+
+  .geo-intro__content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .geo-intro__stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .geo-stat {
+    padding: var(--space-lg);
+    text-align: center;
+  }
+
+  .geo-stat__value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+  }
+
+  .geo-stat__label {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Pillars */
+  .pillars__header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .pillars__header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-sm);
+  }
+
+  .pillars__subtitle {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .pillar {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .pillar__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .pillar__icon-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .pillar__number {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-accent-solid);
+    letter-spacing: 0.1em;
+  }
+
+  .pillar__icon {
+    color: var(--color-accent-solid);
+  }
+
+  .pillar__title {
+    font-size: 1.4rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .pillar__tagline {
+    font-size: 0.85rem;
+    color: var(--color-accent-solid);
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .pillar__description {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+    max-width: 900px;
+  }
+
+  .pillar__features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem 2rem;
+  }
+
+  .pillar__features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+
+  .pillar__features svg {
+    color: var(--color-cyan);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* Deliverables */
+  .deliverables__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .deliverables__content h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-lg);
+  }
+
+  .deliverables__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .deliverables__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
+  .deliverables__list svg {
+    color: var(--color-cyan);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* Pricing Card */
+  .pricing-card {
+    padding: var(--space-xl);
+    text-align: center;
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+  }
+
+  .pricing-card__label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-accent-solid);
+    margin-bottom: var(--space-md);
+  }
+
+  .pricing-card__price {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.15rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .pricing-card__currency {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: 0.5rem;
+  }
+
+  .pricing-card__amount {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .pricing-card__starting {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .pricing-card__divider {
+    height: 1px;
+    background: var(--glass-border);
+    margin: var(--space-lg) 0;
+  }
+
+  .pricing-card__highlights {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .pricing-card__highlights li {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .pricing-card__highlights li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-cyan);
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .pricing-card__cta {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .pricing-card__note {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Final CTA */
+  .final-cta { position: relative; text-align: center; padding: var(--space-3xl) 0; overflow: hidden; }
+  .final-cta__mesh { position: absolute; inset: 0; overflow: hidden; }
+  .final-cta__orb-1 { width: 400px; height: 400px; top: -20%; left: -10%; opacity: 0.2; }
+  .final-cta__orb-2 { width: 350px; height: 350px; bottom: -20%; right: -10%; opacity: 0.15; }
+  .final-cta__inner { position: relative; z-index: 1; max-width: 700px; }
+  .final-cta__title { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: var(--space-md); }
+  .final-cta__body { font-size: 1.15rem; color: var(--color-text-secondary); margin-bottom: var(--space-xl); max-width: 550px; margin-left: auto; margin-right: auto; }
+  .final-cta__button { padding: 1.1rem 3rem; font-size: 1rem; }
+
+  /* Visibility Before/After */
+  .visibility__header { text-align: center; margin-bottom: var(--space-2xl); }
+  .visibility__header h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-sm); }
+  .visibility__subtitle { font-size: 1.05rem; color: var(--color-text-secondary); max-width: 650px; margin: 0 auto; line-height: 1.7; }
+
+  .visibility__comparison {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--space-md);
+    align-items: stretch;
+  }
+
+  .visibility__panel {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+  }
+
+  .visibility__panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .visibility__panel-header--red {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  .visibility__panel-header--green {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+  }
+
+  .visibility__terminal {
+    padding: 1.25rem;
+    background: rgba(0, 0, 0, 0.4);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+
+  .terminal-line { padding: 0.1rem 0; }
+  .terminal-line--comment { color: #6b7280; font-style: italic; }
+  .terminal-line--dim { color: #9ca3af; opacity: 0.6; }
+  .terminal-line--error { color: #ef4444; font-weight: 600; margin-top: 0.5rem; }
+  .terminal-line--success { color: #22c55e; }
+  .terminal-line--highlight { color: #22c55e; font-weight: 700; margin-top: 0.5rem; background: rgba(34, 197, 94, 0.08); padding: 0.25rem 0.5rem; border-radius: 4px; }
+
+  .visibility__vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* AI Platforms */
+  .ai-platforms__header { text-align: center; margin-bottom: var(--space-xl); }
+  .ai-platforms__header h2 { font-size: clamp(2rem, 4vw, 3rem); }
+
+  .ai-platforms__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .ai-platform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: var(--space-lg) var(--space-sm);
+    text-align: center;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .ai-platform:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent-solid);
+  }
+
+  .ai-platform svg { color: var(--color-accent-solid); }
+  .ai-platform span { font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary); }
+
+  .ai-platforms__note {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  /* Code Comparison */
+  .code-compare__header { text-align: center; margin-bottom: var(--space-2xl); }
+  .code-compare__header h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-sm); }
+  .code-compare__subtitle { font-size: 1.05rem; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+  .code-compare__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .code-compare__block {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+  }
+
+  .code-compare__label {
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .code-compare__label--dim {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .code-compare__label--glow {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--color-accent-solid);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .code-compare__code {
+    padding: 1.25rem;
+    background: rgba(0, 0, 0, 0.4);
+    margin: 0;
+    overflow-x: auto;
+  }
+
+  .code-compare__code code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: #9ca3af;
+  }
+
+  .code-compare__code--geo code {
+    color: #a5b4fc;
+  }
+
+  /* Comparison Table */
+  .compare-table__header { text-align: center; margin-bottom: var(--space-2xl); }
+  .compare-table__header h2 { font-size: clamp(2rem, 4vw, 3rem); }
+
+  .compare-table__wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+  }
+
+  .compare-table__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .compare-table__table thead {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .compare-table__table th {
+    padding: 1rem 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: left;
+    color: var(--color-text-muted);
+  }
+
+  .compare-table__geo-col {
+    color: var(--color-accent-solid) !important;
+  }
+
+  .compare-table__table td {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--color-text-secondary);
+  }
+
+  .compare-table__table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .compare-table__no { color: #ef4444; font-weight: 600; text-align: center; }
+  .compare-table__partial { color: #f59e0b; font-weight: 500; text-align: center; }
+  .compare-table__yes { color: #22c55e; font-weight: 600; text-align: center; }
+
+  /* FAQ */
+  .geo-faq__header { text-align: center; margin-bottom: var(--space-2xl); }
+  .geo-faq__header h2 { font-size: clamp(2rem, 4vw, 3rem); }
+
+  .geo-faq__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .geo-faq__item {
+    padding: var(--space-lg);
+  }
+
+  .geo-faq__item h3 {
+    font-size: 1.05rem;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+    font-style: italic;
+  }
+
+  .geo-faq__item p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Social Proof */
+  .social-proof__card {
+    padding: var(--space-xl);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .social-proof__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: 99px;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    margin-bottom: var(--space-lg);
+  }
+
+  .social-proof__badge svg { color: var(--color-accent-solid); }
+  .social-proof__badge span { font-size: 0.8rem; font-weight: 600; color: var(--color-accent-solid); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .social-proof__text {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .social-proof__proof {
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: center;
+  }
+
+  .social-proof__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-accent-solid);
+    text-decoration: none;
+    transition: gap var(--transition-fast);
+  }
+
+  .social-proof__link:hover { gap: 0.6rem; }
+
+  /* Responsive */
+  @media (max-width: 968px) {
+    .geo-intro__grid,
+    .deliverables__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .geo-intro__stats {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .geo-stat {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .pricing-card {
+      position: static;
+    }
+
+    .visibility__comparison {
+      grid-template-columns: 1fr;
+    }
+
+    .visibility__vs {
+      padding: 0.5rem 0;
+    }
+
+    .ai-platforms__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .code-compare__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .geo-faq__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .compare-table__wrap {
+      overflow-x: auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .pillar__features {
+      grid-template-columns: 1fr;
+    }
+
+    .pillar__header {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .geo-intro__stats {
+      flex-direction: column;
+    }
+
+    .ai-platforms__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .social-proof__proof {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bento__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bento__card--lg {
+      grid-column: span 1;
+    }
+
+    .roi-calc__results {
+      grid-template-columns: 1fr;
+    }
+
+    .pill-nav {
+      display: none;
+    }
+  }
+</style>
+
+<!-- Neo-Brutalist Styles -->
+<style>
+  /* Electric Lime accent */
+  .lime-text { color: #c8ff00; }
+
+  /* Neo Typography */
+  .neo-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: #c8ff00;
+    border: 1px solid #c8ff00;
+    padding: 0.3rem 0.75rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .neo-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Floating Pill Nav */
+  .pill-nav {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    z-index: 999;
+    display: flex;
+    gap: 2px;
+    padding: 4px;
+    background: rgba(10, 10, 15, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(200, 255, 0, 0.2);
+    border-radius: 99px;
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  }
+
+  .pill-nav.is-visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  .pill-nav__item {
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: 99px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .pill-nav__item:hover {
+    color: var(--color-text);
+  }
+
+  .pill-nav__item.is-active {
+    background: #c8ff00;
+    color: #0a0a0f;
+  }
+
+  /* Bento Box Grid */
+  .bento__header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .bento__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .bento__card {
+    position: relative;
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .bento__card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #c8ff00;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(200, 255, 0, 0.08);
+  }
+
+  .bento__card--lg {
+    grid-column: span 2;
+  }
+
+  .bento__tag {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #c8ff00;
+    margin-bottom: var(--space-sm);
+  }
+
+  .bento__card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .bento__card p {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .bento__accent {
+    margin-top: var(--space-md);
+    padding: 0.5rem 0.75rem;
+    background: rgba(200, 255, 0, 0.05);
+    border-left: 2px solid #c8ff00;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  .bento__accent code {
+    font-size: 0.75rem;
+    color: #c8ff00;
+  }
+
+  .bento__metric {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-top: var(--space-md);
+  }
+
+  .bento__metric-value {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #c8ff00;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .bento__metric-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+  }
+
+  /* ROI Calculator */
+  .roi-calc__header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .roi-calc__subtitle {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .roi-calc__card {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-xl);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .roi-calc__input-group {
+    margin-bottom: var(--space-xl);
+  }
+
+  .roi-calc__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+
+  .roi-calc__current-value {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #c8ff00;
+    letter-spacing: -0.02em;
+  }
+
+  .roi-calc__slider {
+    width: 100%;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .roi-calc__slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #c8ff00;
+    border: 2px solid #0a0a0f;
+    cursor: pointer;
+  }
+
+  .roi-calc__slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #c8ff00;
+    border: 2px solid #0a0a0f;
+    cursor: pointer;
+  }
+
+  .roi-calc__range-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .roi-calc__results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .roi-calc__result {
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: center;
+  }
+
+  .roi-calc__result--highlight {
+    border-color: #c8ff00;
+    background: rgba(200, 255, 0, 0.03);
+  }
+
+  .roi-calc__result-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .roi-calc__result-value {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+  }
+
+  .roi-calc__result--highlight .roi-calc__result-value {
+    color: #c8ff00;
+  }
+
+  .roi-calc__disclaimer {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* Responsive overrides for Neo-Brutalist sections */
+  @media (max-width: 968px) {
+    .bento__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .bento__card--lg {
+      grid-column: span 2;
+    }
+
+    .roi-calc__results {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .bento__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bento__card--lg {
+      grid-column: span 1;
+    }
+
+    .pill-nav {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // ROI Calculator
+  const slider = document.getElementById('traffic-slider') as HTMLInputElement;
+  const trafficValue = document.getElementById('traffic-value');
+  const citationsResult = document.getElementById('citations-result');
+  const visitorsResult = document.getElementById('visitors-result');
+  const revenueResult = document.getElementById('revenue-result');
+
+  function formatNumber(n: number): string {
+    return n.toLocaleString('en-US');
+  }
+
+  function updateROI() {
+    if (!slider || !trafficValue || !citationsResult || !visitorsResult || !revenueResult) return;
+
+    const traffic = parseInt(slider.value);
+    const citationRate = 0.068;
+    const clickMultiplier = 3.5;
+    const revenuePerVisitor = 5;
+
+    const citations = Math.round(traffic * citationRate);
+    const additionalVisitors = Math.round(citations * clickMultiplier);
+    const revenue = additionalVisitors * revenuePerVisitor;
+
+    trafficValue.textContent = formatNumber(traffic);
+    citationsResult.textContent = formatNumber(citations);
+    visitorsResult.textContent = formatNumber(additionalVisitors);
+    revenueResult.textContent = `$${formatNumber(revenue)}`;
+  }
+
+  slider?.addEventListener('input', updateROI);
+  updateROI();
+
+  // Floating Pill Nav
+  const pillNav = document.getElementById('pill-nav');
+  const sections = document.querySelectorAll('[id]');
+  const pillItems = document.querySelectorAll('.pill-nav__item');
+
+  // Show/hide pill nav based on scroll
+  function updatePillNav() {
+    if (!pillNav) return;
+    const scrollY = window.scrollY;
+    const hero = document.querySelector('.hero');
+    const heroBottom = hero ? (hero as HTMLElement).offsetTop + (hero as HTMLElement).offsetHeight : 600;
+    const footer = document.querySelector('footer');
+    const footerTop = footer ? (footer as HTMLElement).offsetTop - window.innerHeight : Infinity;
+
+    if (scrollY > heroBottom && scrollY < footerTop) {
+      pillNav.classList.add('is-visible');
+    } else {
+      pillNav.classList.remove('is-visible');
+    }
+
+    // Update active state
+    let current = '';
+    sections.forEach((section) => {
+      const el = section as HTMLElement;
+      const sectionTop = el.offsetTop - 200;
+      if (scrollY >= sectionTop) {
+        current = el.id;
+      }
+    });
+
+    pillItems.forEach((item) => {
+      item.classList.remove('is-active');
+      if (item.getAttribute('data-section') === current) {
+        item.classList.add('is-active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updatePillNav, { passive: true });
+  updatePillNav();
+
+  // Smooth scroll for pill nav
+  pillItems.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = item.getAttribute('href')?.slice(1);
+      if (targetId) {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>

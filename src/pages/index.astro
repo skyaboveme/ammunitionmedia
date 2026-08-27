@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
+import Hero3D from '../components/Hero3D.astro';
 import StatsBar from '../components/StatsBar.astro';
 import ServiceGrid from '../components/ServiceGrid.astro';
 import PhilosophyCards from '../components/PhilosophyCards.astro';
@@ -123,14 +123,13 @@ const philosophyBlocks = [
 >
   <Header slot="header" currentPath="/" />
 
-  <Hero
+  <Hero3D
     title="Turn Web Traffic"
     titleAccent="Into Revenue"
     subtitle="Modern AdTech for Ambitious Brands"
     description="Strategic advertising solutions that connect your brand with the right audience, at the right time, on the right platform."
     ctaText="Schedule Consultation"
-    ctaHref="mailto:johnmark@ammunition.media"
-    backgroundImage="/images/hero-home.jpg"
+    ctaHref="/contact/"
   />
 
   <LogoMarquee />

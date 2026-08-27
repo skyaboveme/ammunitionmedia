@@ -10,7 +10,7 @@ Digital Out of Home (DOOH) advertising is experiencing its biggest growth surge 
 
 ## The DOOH Revolution
 
-Traditional out-of-home advertising — billboards, bus shelters, transit ads — has always excelled at reach. But it lacked the targeting, flexibility, and measurement that digital channels offered. Programmatic DOOH changes everything.
+Traditional out-of-home advertising - billboards, bus shelters, transit ads - has always excelled at reach. But it lacked the targeting, flexibility, and measurement that digital channels offered. Programmatic DOOH changes everything.
 
 ## What's Changed
 
@@ -18,7 +18,7 @@ Traditional out-of-home advertising — billboards, bus shelters, transit ads �
 
 **Location Targeting**: Trigger ads based on proximity to stores, events, or competitor locations. Geofencing technology ensures your message appears when and where it matters most.
 
-**Dynamic Creative**: Swap creative based on time of day, weather, traffic conditions, or local events. A coffee brand can promote iced drinks on hot days and warm lattes on cold ones — automatically.
+**Dynamic Creative**: Swap creative based on time of day, weather, traffic conditions, or local events. A coffee brand can promote iced drinks on hot days and warm lattes on cold ones - automatically.
 
 **Measurement**: Mobile device tracking and foot traffic attribution link DOOH exposure to store visits and conversions, finally proving ROI.
 

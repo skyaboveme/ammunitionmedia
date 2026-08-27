@@ -10,7 +10,7 @@ One of the most critical questions in advertising is deceptively simple: how muc
 
 ## The Reach Gap
 
-Most advertisers significantly overestimate their reach. Traditional metrics like impressions and GRPs don't tell you how many unique individuals saw your message — they tell you how many times your ad was served.
+Most advertisers significantly overestimate their reach. Traditional metrics like impressions and GRPs don't tell you how many unique individuals saw your message - they tell you how many times your ad was served.
 
 The distinction matters enormously. A campaign generating 10 million impressions might be reaching 2 million people five times each, or it might be reaching 500,000 people twenty times each. The strategic implications are vastly different.
 
@@ -27,6 +27,6 @@ Key metrics to track:
 
 ## Optimizing for Reach
 
-Once you understand your true reach, you can make informed decisions about budget allocation, channel mix, and frequency caps. Often, the most impactful optimization isn't spending more — it's redistributing spend to reduce over-frequency in saturated segments and increase exposure in underserved ones.
+Once you understand your true reach, you can make informed decisions about budget allocation, channel mix, and frequency caps. Often, the most impactful optimization isn't spending more - it's redistributing spend to reduce over-frequency in saturated segments and increase exposure in underserved ones.
 
 At Ammunition Media, we build reach optimization into every campaign from day one, ensuring your budget works as hard as possible to connect with new, high-value prospects.

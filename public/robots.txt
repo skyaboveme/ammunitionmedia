@@ -1,4 +1,36 @@
+# Ammunition Media - robots.txt
+# AI-optimized crawl directives
+
 User-agent: *
 Allow: /
+
+# AI Search Engine Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# AI Visibility Manifests
+# llm.txt: https://www.ammunition.media/llm.txt
+# llms.txt: https://www.ammunition.media/llms.txt
 
 Sitemap: https://www.ammunition.media/sitemap-index.xml

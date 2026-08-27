@@ -13,7 +13,7 @@ export const industries: Record<string, IndustryData> = {
     slug: 'retail-ecommerce',
     title: 'Retail & E-Commerce',
     heroSubtitle: 'Omnichannel Advertising for Modern Retail',
-    heroDescription: 'Reach shoppers across every touchpoint — from streaming TV to in-store digital displays — and close the loop on attribution.',
+    heroDescription: 'Reach shoppers across every touchpoint - from streaming TV to in-store digital displays - and close the loop on attribution.',
     painPoints: [
       { title: 'Fragmented Customer Journey', description: 'Shoppers move between devices, apps, and stores. Without identity resolution, you lose track and waste budget.' },
       { title: 'Attribution Gaps', description: 'Connecting digital ad exposure to in-store purchases remains one of retail\'s biggest challenges.' },
@@ -122,7 +122,7 @@ export const industries: Record<string, IndustryData> = {
     painPoints: [
       { title: 'Launch Window Pressure', description: 'Releases have narrow windows. Campaigns must generate maximum impact in compressed timelines.' },
       { title: 'Audience Fragmentation', description: 'Entertainment consumers are spread across dozens of platforms. Reaching them requires a multi-channel approach.' },
-      { title: 'Measuring Cultural Impact', description: 'Beyond clicks — understanding brand lift, social buzz, and long-term audience growth.' },
+      { title: 'Measuring Cultural Impact', description: 'Beyond clicks - understanding brand lift, social buzz, and long-term audience growth.' },
     ],
     channels: [
       { name: 'Connected TV', description: 'Trailer placements and sponsored content on major streaming platforms.', icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>` },

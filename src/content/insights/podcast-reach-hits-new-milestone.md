@@ -14,7 +14,7 @@ Podcast advertising benefits from several unique attributes:
 
 **Host-Read Trust**: When a trusted host personally endorses your product, it carries weight that traditional ads can't match. Studies show host-read podcast ads generate 4x higher brand recall than display ads.
 
-**Lean-In Attention**: Podcast listeners actively choose their content and pay close attention. There's no second screen — it's your message in their ears.
+**Lean-In Attention**: Podcast listeners actively choose their content and pay close attention. There's no second screen - it's your message in their ears.
 
 **Affluent Demographics**: Podcast listeners skew higher income, higher education, and higher purchase intent across most categories.
 

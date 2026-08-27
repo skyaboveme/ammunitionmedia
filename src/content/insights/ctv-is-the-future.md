@@ -10,11 +10,11 @@ Connected Television has evolved from an emerging channel to the cornerstone of 
 
 ## The Shift Is Irreversible
 
-Over 87% of US households now have at least one connected TV device. Linear TV viewership continues to decline while streaming consumption grows. This isn't a trend — it's a permanent structural shift in how people consume video content.
+Over 87% of US households now have at least one connected TV device. Linear TV viewership continues to decline while streaming consumption grows. This isn't a trend - it's a permanent structural shift in how people consume video content.
 
 ## CTV Combines the Best of Both Worlds
 
-**Television Impact**: Full-screen, sound-on, lean-back viewing creates the emotional impact that builds brands. CTV ads aren't skippable banner ads — they're premium video experiences.
+**Television Impact**: Full-screen, sound-on, lean-back viewing creates the emotional impact that builds brands. CTV ads aren't skippable banner ads - they're premium video experiences.
 
 **Digital Precision**: Unlike traditional TV's broad demographic targeting, CTV enables household-level and individual-level targeting based on first-party data, behavioral signals, and purchase history.
 
@@ -22,7 +22,7 @@ Over 87% of US households now have at least one connected TV device. Linear TV v
 
 ## Making CTV Work
 
-The most common mistake advertisers make with CTV is treating it like digital video. The creative matters enormously — you're competing for attention on the biggest screen in the house.
+The most common mistake advertisers make with CTV is treating it like digital video. The creative matters enormously - you're competing for attention on the biggest screen in the house.
 
 Successful CTV campaigns require:
 - High-quality video creative (not repurposed social ads)

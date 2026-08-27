@@ -6,7 +6,7 @@ description: "The power of omnichannel advertising to reach customers wherever t
 category: "Strategy"
 ---
 
-In today's fragmented media landscape, your customers don't follow a linear path to purchase. They move between devices, platforms, and channels throughout the day — and your advertising needs to follow them.
+In today's fragmented media landscape, your customers don't follow a linear path to purchase. They move between devices, platforms, and channels throughout the day - and your advertising needs to follow them.
 
 ## The Omnichannel Imperative
 
@@ -26,6 +26,6 @@ Effective advertising meets these consumers where they are, with consistent mess
 
 ## Making It Work
 
-The key to successful omnichannel advertising isn't just being everywhere — it's being everywhere with purpose. Each channel should play a specific role in your customer's journey, from awareness to consideration to conversion.
+The key to successful omnichannel advertising isn't just being everywhere - it's being everywhere with purpose. Each channel should play a specific role in your customer's journey, from awareness to consideration to conversion.
 
 At Ammunition Media, we design integrated campaigns that leverage the unique strengths of each channel while maintaining a unified brand experience. Our identity resolution technology ensures you're reaching the same person across devices, eliminating waste and maximizing impact.

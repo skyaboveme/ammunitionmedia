@@ -24,6 +24,6 @@ Bottom-of-funnel tactics target consumers who are already in the market for your
 
 ## Balancing the Funnel
 
-While BOF deserves its "top dog" status for immediate ROI, a complete strategy includes top and mid-funnel investment to continuously fill the pipeline. The most efficient campaigns maintain a healthy balance — typically 60% awareness, 20% consideration, and 20% conversion-focused.
+While BOF deserves its "top dog" status for immediate ROI, a complete strategy includes top and mid-funnel investment to continuously fill the pipeline. The most efficient campaigns maintain a healthy balance - typically 60% awareness, 20% consideration, and 20% conversion-focused.
 
 At Ammunition Media, we engineer full-funnel campaigns that prioritize BOF efficiency while building the brand awareness that sustains long-term growth.

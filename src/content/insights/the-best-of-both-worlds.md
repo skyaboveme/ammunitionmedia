@@ -6,11 +6,11 @@ description: "Combining traditional media expertise with cutting-edge digital te
 category: "Strategy"
 ---
 
-The most effective advertising strategies don't choose between traditional and digital — they combine both for maximum impact. At Ammunition Media, we call this the "best of both worlds" approach.
+The most effective advertising strategies don't choose between traditional and digital - they combine both for maximum impact. At Ammunition Media, we call this the "best of both worlds" approach.
 
 ## Why Integration Matters
 
-Traditional media — television, radio, print, out-of-home — still drives massive reach and brand awareness. Digital media provides precision targeting, real-time optimization, and detailed measurement. Together, they create a multiplier effect that neither achieves alone.
+Traditional media - television, radio, print, out-of-home - still drives massive reach and brand awareness. Digital media provides precision targeting, real-time optimization, and detailed measurement. Together, they create a multiplier effect that neither achieves alone.
 
 Research consistently shows that campaigns spanning both traditional and digital channels outperform single-channel efforts by 20-30% on key brand metrics.
 

@@ -8,11 +8,11 @@ category: "Technology"
 
 The shift from second-price to first-price auctions in programmatic advertising fundamentally changed the economics of digital media buying. Without the built-in price correction of second-price auctions, advertisers faced a new challenge: how to bid competitively without systematically overpaying.
 
-Enter bid shading — a technology that's become essential for efficient programmatic buying.
+Enter bid shading - a technology that's become essential for efficient programmatic buying.
 
 ## How Bid Shading Works
 
-In a first-price auction, you pay exactly what you bid. Without intervention, this creates a natural tendency to overbid, especially for high-value inventory. Bid shading algorithms analyze historical auction data, competitive dynamics, and inventory characteristics to calculate the optimal bid — high enough to win, but not higher than necessary.
+In a first-price auction, you pay exactly what you bid. Without intervention, this creates a natural tendency to overbid, especially for high-value inventory. Bid shading algorithms analyze historical auction data, competitive dynamics, and inventory characteristics to calculate the optimal bid - high enough to win, but not higher than necessary.
 
 ## The Impact on Campaign Efficiency
 

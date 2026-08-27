@@ -18,7 +18,7 @@ This principle is the foundation of modern A/B testing and multivariate optimiza
 
 ## "If it doesn't sell, it isn't creative."
 
-In a digital world obsessed with engagement metrics, Ogilvy's focus on sales remains vital. Creativity must serve a commercial purpose. Beautiful ads that don't move product aren't truly creative — they're expensive art.
+In a digital world obsessed with engagement metrics, Ogilvy's focus on sales remains vital. Creativity must serve a commercial purpose. Beautiful ads that don't move product aren't truly creative - they're expensive art.
 
 ## "On the average, five times as many people read the headline as read the body copy."
 

@@ -22,7 +22,7 @@ Dynamic creative optimization powered by AI will become table stakes. The abilit
 
 ## Retail Media Networks
 
-The explosive growth of retail media — advertising within retailer ecosystems — gives brands access to purchase-level data and closed-loop attribution that other channels can't match.
+The explosive growth of retail media - advertising within retailer ecosystems - gives brands access to purchase-level data and closed-loop attribution that other channels can't match.
 
 ## The Attention Economy
 

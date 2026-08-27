@@ -16,25 +16,25 @@ Ammunition Media is a data-driven digital advertising and media agency led by Jo
 ## Services
 
 ### Digital Media
-- Connected Television (CTV) — Streaming TV ads with household-level precision and cross-screen attribution
-- Digital Audio — Podcast and streaming music advertising with dynamic insertion and listen-through attribution
-- Programmatic Display, Native & Video — Real-time bidding, contextual targeting, and cross-device reach
-- Identity Resolution — Cross-device matching, cookie-free solutions, and unified customer view
-- Digital Out of Home (DOOH) — Programmatic billboard ads, location-based targeting, and foot traffic attribution
-- Retail Media Networks — Shopper marketing, first-party retail data, and closed-loop attribution
+- Connected Television (CTV) - Streaming TV ads with household-level precision and cross-screen attribution
+- Digital Audio - Podcast and streaming music advertising with dynamic insertion and listen-through attribution
+- Programmatic Display, Native & Video - Real-time bidding, contextual targeting, and cross-device reach
+- Identity Resolution - Cross-device matching, cookie-free solutions, and unified customer view
+- Digital Out of Home (DOOH) - Programmatic billboard ads, location-based targeting, and foot traffic attribution
+- Retail Media Networks - Shopper marketing, first-party retail data, and closed-loop attribution
 
 ### PR & Promotions
-- PESO Public Relations — News releases, community relations, editorial writing
-- Entertainment & Events — Celebrity endorsements, experiential activations, live event production
-- Influencer Marketing & Sponsorships — Campaign strategy, content co-creation, ROI measurement
+- PESO Public Relations - News releases, community relations, editorial writing
+- Entertainment & Events - Celebrity endorsements, experiential activations, live event production
+- Influencer Marketing & Sponsorships - Campaign strategy, content co-creation, ROI measurement
 
 ### Modern Media Capabilities
-- Identity Resolution — Unified customer view across devices and channels
-- Data Activation — First-party and third-party data audience segmentation
-- Monitor & Measurement — Real-time performance tracking and multi-touch attribution
-- Addressable Audiences — Household and individual-level deterministic targeting
-- People-Based Inventory — Premium, authenticated audience reach at scale
-- Data Collection — Privacy-compliant first-party data foundation building
+- Identity Resolution - Unified customer view across devices and channels
+- Data Activation - First-party and third-party data audience segmentation
+- Monitor & Measurement - Real-time performance tracking and multi-touch attribution
+- Addressable Audiences - Household and individual-level deterministic targeting
+- People-Based Inventory - Premium, authenticated audience reach at scale
+- Data Collection - Privacy-compliant first-party data foundation building
 
 ## Philosophy
 - **Creativity**: Bright, thoughtful ads that resonate with ideal audiences
@@ -42,27 +42,28 @@ Ammunition Media is a data-driven digital advertising and media agency led by Jo
 - **Safety**: Contextual relevance ensuring brand-safe, appropriate ad environments
 
 ## Our Process
-1. **Discovery** — We learn your business, audience, and goals through an in-depth strategy session
-2. **Strategy** — We design a custom media plan with the right channels, targeting, and budget allocation
-3. **Launch** — Campaigns go live with precision targeting, real-time bidding, and creative optimization
-4. **Optimize** — Continuous measurement, A/B testing, and refinement to maximize ROAS
+1. **Discovery** - We learn your business, audience, and goals through an in-depth strategy session
+2. **Strategy** - We design a custom media plan with the right channels, targeting, and budget allocation
+3. **Launch** - Campaigns go live with precision targeting, real-time bidding, and creative optimization
+4. **Optimize** - Continuous measurement, A/B testing, and refinement to maximize ROAS
 
 ## Industries We Serve
-- [Retail & E-Commerce](https://www.ammunition.media/industries/retail-ecommerce/): Omnichannel advertising — Retail Media Networks, CTV, Identity Resolution
-- [Healthcare & Pharma](https://www.ammunition.media/industries/healthcare-pharma/): Compliant, targeted reach — Digital Audio, DOOH, Programmatic Display
-- [Automotive](https://www.ammunition.media/industries/automotive/): Showroom traffic & brand loyalty — CTV, DOOH, Identity Resolution
-- [Real Estate](https://www.ammunition.media/industries/real-estate/): High-intent buyer targeting — CTV, Programmatic Display, DOOH
-- [Financial Services](https://www.ammunition.media/industries/financial-services/): Trust-building & client acquisition — CTV, Digital Audio, Programmatic Display
-- [Entertainment & Media](https://www.ammunition.media/industries/entertainment-media/): Launch amplification & audience growth — CTV, Digital Audio, DOOH
+- [Retail & E-Commerce](https://www.ammunition.media/industries/retail-ecommerce/): Omnichannel advertising - Retail Media Networks, CTV, Identity Resolution
+- [Healthcare & Pharma](https://www.ammunition.media/industries/healthcare-pharma/): Compliant, targeted reach - Digital Audio, DOOH, Programmatic Display
+- [Automotive](https://www.ammunition.media/industries/automotive/): Showroom traffic & brand loyalty - CTV, DOOH, Identity Resolution
+- [Real Estate](https://www.ammunition.media/industries/real-estate/): High-intent buyer targeting - CTV, Programmatic Display, DOOH
+- [Financial Services](https://www.ammunition.media/industries/financial-services/): Trust-building & client acquisition - CTV, Digital Audio, Programmatic Display
+- [Entertainment & Media](https://www.ammunition.media/industries/entertainment-media/): Launch amplification & audience growth - CTV, Digital Audio, DOOH
 
 ## Case Studies
-- **DTC E-Commerce Brand** — CTV + Programmatic campaign delivering 327% ROAS, 42% lower CPA, 2.1M households reached
-- **Regional Healthcare Network** — Digital Audio + DOOH driving 156% increase in bookings, 3.8x foot traffic lift, $12 cost per appointment
-- **National Retail Chain** — Identity Resolution achieving 89% match rate, 2.4x conversion lift, 34% reduction in wasted spend
+- **DTC E-Commerce Brand** - CTV + Programmatic campaign delivering 327% ROAS, 42% lower CPA, 2.1M households reached
+- **Regional Healthcare Network** - Digital Audio + DOOH driving 156% increase in bookings, 3.8x foot traffic lift, $12 cost per appointment
+- **National Retail Chain** - Identity Resolution achieving 89% match rate, 2.4x conversion lift, 34% reduction in wasted spend
 
 ## Pages
 - [Home](https://www.ammunition.media/)
 - [Services](https://www.ammunition.media/services/)
+- [GEO Website](https://www.ammunition.media/geo-website/)
 - [Case Studies](https://www.ammunition.media/case-studies/)
 - [Modern Media](https://www.ammunition.media/modern-media/)
 - [Insights](https://www.ammunition.media/insights/)
